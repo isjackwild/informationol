@@ -41,8 +41,6 @@ export const update = (delta) => {
 	pillbox.rotation.x += (targetX - pillbox.rotation.x) * 0.05;
 	pillbox.rotation.y += (targetY - pillbox.rotation.y) * 0.05;
 
-	// pills.forEach((pill, i) => pill.updateMesh());
-
 	if (controls) controls.update(delta);
 	updateSkybox(delta);
 }

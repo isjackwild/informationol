@@ -48,6 +48,12 @@ const onMouseMove = (e) => {
 const addEventListeners = () => {
 	window.addEventListener('resize', _.throttle(onResize, 16.666));
 	window.addEventListener('mousemove', _.throttle(onMouseMove, 16.666));
+	// const canvas = document.getElementsByClassName('canvas')[0];
+	// canvas.addEventListener('click', (e) => {
+	// 	canvas.requestFullscreen();
+	// 	canvas.webkitRequestFullscreen();
+	// 	canvas.webkitRequestFullScreen();
+	// }, false);
 }
 
 

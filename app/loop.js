@@ -1,4 +1,5 @@
 const THREE = require('three');
+require('./vendor/StereoEffect.js');
 import { update as updatePhysics } from './scene.js';
 import { init as initScene, scene, update as updateScene } from './scene.js';
 import { init as initCamera, camera } from './camera.js';
@@ -6,7 +7,7 @@ import { init as initCamera, camera } from './camera.js';
 let canvas;
 let raf, then, now, delta;
 let currentCamera, currentScene;
-export let renderer;
+export let renderer, stereoFx;
 
 export const init = () => {
 	canvas = document.getElementsByClassName('canvas')[0];
@@ -30,6 +31,7 @@ const setupRenderer = () => {
 	renderer.setClearColor(0x282828);
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	stereoFx = new THREE.StereoEffect(renderer);
 }
 
 const update = (delta) => {
@@ -37,8 +39,8 @@ const update = (delta) => {
 }
 
 const render = () => {
-	currentCamera.lookAt(currentScene.position);
-	renderer.render(currentScene, currentCamera);
+	// currentCamera.lookAt(currentScene.position);
+	stereoFx.render(currentScene, currentCamera);
 }
 
 const animate = () => {
