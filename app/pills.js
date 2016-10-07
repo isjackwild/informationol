@@ -3,14 +3,14 @@ const THREE = require('three');
 import _ from 'lodash';
 import { createPanner, decode } from './sound-handler.js';
 import { WORLD_SIZE, INIT_POSITION_VARIATION, TIMESTEP, BODIES_COUNT, MAX_VELOCITY, MIN_VELOCITY, WIND_STRENGTH, PILLS_COUNT } from './constants.js';
-export const pills = [];
 
 
-class Particle {
-	constructor({ x, y, z, mass, velocity, soundSrc }) {
+export default class Particle {
+	constructor({ x, y, z, mass, velocity, soundSrc, audioScene }) {
 		this.initPosition = { x, y, z };
 		this.mass = mass;
 		this.initVelocity = { x: velocity, y: velocity, z: velocity };
+		this.audioScene = audioScene;
 		this.onLoadSound = this.onLoadSound.bind(this);
 		this.onDecodeSound = this.onDecodeSound.bind(this);
 
@@ -34,6 +34,8 @@ class Particle {
 		const geometry = new THREE.BoxGeometry(4, 4, 0.4);
 		const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
 		this.mesh = new THREE.Mesh(geometry, material);
+		this.mesh.onEnterFocus = this.onEnterFocus.bind(this);
+		this.mesh.onExitFocus = this.onExitFocus.bind(this);
 	}
 
 	loadSound(src) {
@@ -46,14 +48,14 @@ class Particle {
 
 	onLoadSound(e) {
 		if (e.target.readyState === 4 && e.target.status === 200) {
-			decode(e.target.response, this.onDecodeSound, this.onErrorDecodeSound);
+			this.audioScene.decode(e.target.response, this.onDecodeSound, this.onErrorDecodeSound);
 		} else if (e.target.readyState === 4) {
 			console.error('Error: Sound probably missing');
 		}
 	}
 
 	onDecodeSound(e) {
-		this.sound = createPanner(e);
+		this.sound = this.audioScene.createPanner(e);
 		this.sound.source.start(0);
 	}
 
@@ -63,6 +65,14 @@ class Particle {
 
 	kill() {
 		// Blah
+	}
+
+	onEnterFocus() {
+		this.mesh.material.color.set(0xff00ff);
+	}
+
+	onExitFocus() {
+		this.mesh.material.color.set(0x00ff00);
 	}
 
 	update(wind) {
@@ -78,12 +88,12 @@ class Particle {
 		this.mesh.quaternion.copy(this.body.quaternion);
 
 		if (this.sound) {
-			this.sound.pannerForward.setPosition(this.mesh.position.x, this.mesh.position.y, this.mesh.position.z);
-			this.sound.pannerBackward.setPosition(this.mesh.position.x, this.mesh.position.y, this.mesh.position.z);
 			const matrix = new THREE.Matrix4();
 			matrix.extractRotation(this.mesh.matrix);
 			const direction = new THREE.Vector3(0, 0, 1);
 			matrix.multiplyVector3(direction)
+			this.sound.pannerForward.setPosition(this.mesh.position.x, this.mesh.position.y, this.mesh.position.z);
+			this.sound.pannerBackward.setPosition(this.mesh.position.x, this.mesh.position.y, this.mesh.position.z);
 			this.sound.pannerForward.setOrientation(direction.x, direction.y, direction.z);
 			this.sound.pannerBackward.setOrientation(direction.x * -1, direction.y * -1, direction.z * -1);
 		}
@@ -97,15 +107,4 @@ class Particle {
 			return vel;
 		}
 	}
-}
-
-for (let i = 0; i < PILLS_COUNT; i++) {
-	pills.push(new Particle({
-		x: (Math.random() * INIT_POSITION_VARIATION) - INIT_POSITION_VARIATION / 2,
-		y: (Math.random() * INIT_POSITION_VARIATION) - INIT_POSITION_VARIATION / 2,
-		z: (Math.random() * INIT_POSITION_VARIATION) - INIT_POSITION_VARIATION / 2,
-		mass: Math.random() + 0.5,
-		velocity: Particle.generateVelocity(),
-		soundSrc: `${Math.floor(Math.random() * 6)}.mp3`,
-	}));
 }

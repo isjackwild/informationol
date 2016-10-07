@@ -1,9 +1,8 @@
 const THREE = require('three');
 require('./vendor/StereoEffect.js');
-import { update as updatePhysics } from './scene.js';
 import { init as initScene, scene, update as updateScene } from './scene.js';
 import { init as initCamera, camera } from './camera.js';
-import { positionListener } from './sound-handler.js';
+
 
 let canvas;
 let raf, then, now, delta;
@@ -37,8 +36,6 @@ const setupRenderer = () => {
 
 const update = (delta) => {
 	updateScene(delta);
-
-	positionListener(currentCamera.position, currentCamera.getWorldDirection());
 }
 
 const render = () => {

@@ -22,7 +22,6 @@ const kickIt = () => {
 
 	addEventListeners();
 	onResize();
-	initPhysics();
 	initCamera();
 	initScene();
 	initLoop();
