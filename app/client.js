@@ -19,6 +19,7 @@ const kickIt = () => {
 	if (window.app.debug) {
 		window.app.gui = new dat.GUI();
 	}
+
 	addEventListeners();
 	onResize();
 	initPhysics();

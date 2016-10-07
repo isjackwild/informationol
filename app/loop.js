@@ -3,6 +3,7 @@ require('./vendor/StereoEffect.js');
 import { update as updatePhysics } from './scene.js';
 import { init as initScene, scene, update as updateScene } from './scene.js';
 import { init as initCamera, camera } from './camera.js';
+import { positionListener } from './sound-handler.js';
 
 let canvas;
 let raf, then, now, delta;
@@ -36,11 +37,17 @@ const setupRenderer = () => {
 
 const update = (delta) => {
 	updateScene(delta);
+
+	positionListener(currentCamera.position, currentCamera.getWorldDirection());
 }
 
 const render = () => {
 	// currentCamera.lookAt(currentScene.position);
-	stereoFx.render(currentScene, currentCamera);
+	if (window.location.search.indexOf('vr') > -1) {
+		stereoFx.render(currentScene, currentCamera);
+	} else {
+		renderer.render(currentScene, currentCamera);
+	}
 }
 
 const animate = () => {
