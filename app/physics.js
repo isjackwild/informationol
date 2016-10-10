@@ -14,7 +14,7 @@ export const PhysicsScene = () => {
 	world.gravity.set(0,0,0);
 	world.broadphase = new CANNON.NaiveBroadphase();
 	world.solver.iterations = 10;
-	world.defaultContactMaterial.restitution = 0.5;
+	world.defaultContactMaterial.restitution = 0.8;
 	world.defaultContactMaterial.friction = 0;
 
 
@@ -122,7 +122,7 @@ export const PhysicsScene = () => {
 	}
 
 	setupWalls();
-	setupWindHelpers();
+	// setupWindHelpers();
 
 	return { update, add, walls, windHelpers }
 }

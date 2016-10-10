@@ -10,11 +10,11 @@ import { PhysicsScene } from './physics.js';
 import { lights } from './lighting.js';
 import { convertToRange } from './lib/maths.js';
 import { update as updateRaycaster } from './raycaster.js';
-import { AudioScene } from './sound-handler.js';
+import { AudioScene, positionListener } from './sound-handler.js';
 import { PILLS_COUNT, INIT_POSITION_VARIATION } from './constants.js';
 
 const maxRotation = { x: 1, y: 1 };
-
+let loops = 0;
 
 export const init = () => {
 	scene = new THREE.Scene();
@@ -27,8 +27,10 @@ export const init = () => {
 			x: (Math.random() * INIT_POSITION_VARIATION) - INIT_POSITION_VARIATION / 2,
 			y: (Math.random() * INIT_POSITION_VARIATION) - INIT_POSITION_VARIATION / 2,
 			z: (Math.random() * INIT_POSITION_VARIATION) - INIT_POSITION_VARIATION / 2,
-			mass: Math.random() / 2 + 0.5,
-			velocity: Particle.generateVelocity(),
+			mass: Math.random() / 4 + 0.25,
+			// mass: 0,
+			// velocity: Particle.generateVelocity(),
+			velocity: 0,
 			soundSrc: `${Math.floor(Math.random() * 6)}.mp3`,
 			audioScene,
 		}));
@@ -41,7 +43,9 @@ export const init = () => {
 	lights.forEach((light) => {
 		scene.add(light);
 	});
-	// scene.add(pillbox);
+
+	// scene.add(shadowCameraHelper);
+
 
 	pills.forEach((pill) => {
 		scene.add(pill.mesh);
@@ -66,9 +70,10 @@ export const update = (delta) => {
 	const position = new THREE.Vector3().copy(camera.position);
 	const direction = new THREE.Vector3().copy(camera.getWorldDirection());
 	updateSkybox(delta);
-	updateRaycaster(position, direction, intersectableMeshes);
-	physicsScene.update(delta, pills);
-	audioScene.positionListener(position, direction);
+	if (loops % 10 === 0) updateRaycaster(position, direction, intersectableMeshes);
+	physicsScene.update(delta);
+	positionListener(position, direction);
 
 	if (controls) controls.update(delta);
+	loops++
 }
