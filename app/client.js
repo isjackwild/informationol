@@ -8,7 +8,6 @@ const dat = require('dat-gui');
 import { init as initLoop, renderer } from './loop.js';
 import { init as initScene } from './scene.js';
 import { init as initCamera} from './camera.js';
-import { init as initPhysics } from './physics.js';
 import { camera } from './camera.js';
 import _ from 'lodash';
 
