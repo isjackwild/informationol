@@ -10,6 +10,7 @@ const util = require('gulp-util');
 const SCSS_SRC_FILE = '../app/main.scss';
 const SCSS_SRC_FILES = [
 	'../app/*.scss',
+	'../app/styles/*.scss',
 ];
 const SCSS_BUILD_FOLDER = '../build/assets/css';
 
