@@ -1,134 +1,57 @@
 $red: #d40b3b;
-
-// // font-family: 'Merriweather', serif;
-// // font-family: 'Roboto Slab', serif;
-// // font-family: 'Droid Serif', serif;
-// // font-family: 'PT Serif', serif;
-// // font-family: 'Source Serif Pro', serif;
-// // font-family: 'Halant', serif;
-// // font-family: 'Sura', serif;
-// // font-family: 'Roboto', sans-serif;
-// // font-family: 'Titillium Web', sans-serif;
-// // font-family: 'Karla', sans-serif;
-// // font-family: 'Fira Sans', sans-serif;
-// // font-family: 'Kanit', sans-serif;
-// // font-family: 'Prompt', sans-serif;
-// // font-family: 'Work Sans', sans-serif;
-// // font-family: 'Inconsolata', monospace;
-// // font-family: 'Anonymous Pro', monospace;
-// // font-family: 'Fira Mono', monospace;
-// // font-family: 'PT Mono', monospace;
-// // 
-
-// * {
-// }
-
-// html {
-// 	font-size: 62.5%;
-// 	text-rendering: optimizeLegibility !important;
-// 	// font-size: 112.5%;
-// }
+$mobile: 736px;
 
 
-// h1, h2, h3, h4, figcaption, li {
-// 	font-family: 'Kanit', sans-serif;
-// 	// font-family: 'Titillium Web', sans-serif;
-// 	font-family: 'Fira Sans', sans-serif;
-// 	font-family: 'Work Sans', sans-serif;
-// 	// font-family: 'Prompt', sans-serif;
-// }
+@font-face {
+    font-family: 'Poppins';
+    src: url('../webfonts/Poppins/Poppins-Light.ttf');
+    font-style: normal;
+    font-weight: 200;
+}
 
-// .metadata {
-// 	font-size: 1.2rem;
-// 	line-height: 1.3em;
-// 	font-family: 'Inconsolata', monospace;
-// 	// font-family: 'Anonymous Pro', monospace;
-// 	// font-family: 'Fira Mono', monospace;
-// 	// font-family: 'PT Mono', monospace;
-// }
+@font-face {
+    font-family: 'Poppins';
+    src: url('../webfonts/Poppins/Poppins-Regular.ttf');
+    font-style: normal;
+    font-weight: 300;
+}
 
-// h1 {
-// 	font-weight: 600;
-// 	font-size: 5.2rem;
-// 	line-height: 4.0rem;
-// 	letter-spacing: -0.01em;
-// }
+@font-face {
+    font-family: 'Poppins';
+    src: url('../webfonts/Poppins/Poppins-Medium.ttf');
+    font-style: normal;
+    font-weight: 400;
+}
 
-// h1.book-title {
-// 	font-size: 6.8rem;
-// 	line-height: 6.5rem;
-// 	font-weight: 800;
-// }
+@font-face {
+    font-family: 'Poppins';
+    src: url('../webfonts/Poppins/Poppins-SemiBold.ttf');
+    font-style: normal;
+    font-weight: 500;
+}
 
-// h2 {
-// 	font-size: 3.0rem;
-// 	font-weight: 400;
-// }
+@font-face {
+    font-family: 'Poppins';
+    src: url('../webfonts/Poppins/Poppins-Bold.ttf');
+    font-style: normal;
+    font-weight: 600;
+}
 
-// h2.author {
-// 	font-weight: 200;
-// 	font-size: 4.2rem;
-// 	line-height: 4.2rem;
-// }
+@font-face {
+    font-family: 'Inconsolata';
+    src: url('../webfonts/Inconsolata/Inconsolata-Regular.ttf');
+    font-style: normal;
+    font-weight: 300;
+}
 
-// h3 {
-// 	font-weight: 600;
-// 	font-size: 1.9rem;
-// 	letter-spacing: 0.015em;
-// }
-
-// .page-links a {
-// 	color: inherit;
-// 	font-weight: 600;
-// 	font-family: 'Titillium Web', sans-serif;
-// 	font-family: 'Karla', sans-serif;
-// 	font-size: 1.8rem;
-// 	letter-spacing: 0.05em;
-// 	// text-transform: uppercase;
-// }
-
-// p {
-// 	font-family: 'Halant', serif;
-// 	// font-family: 'PT Serif', serif;
-// 	font-size: 2.0rem;
-// 	line-height: 1.6em;
-// 	text-indent: 1.7rem;
-// }
-
-// h1 + p, h2 + p, h3 + p, figure + p {
-// 	text-indent: 0;
-// }
+@font-face {
+    font-family: 'Inconsolata';
+    src: url('../webfonts/Inconsolata/Inconsolata-Bold.ttf');
+    font-style: normal;
+    font-weight: 600;
+}
 
 
-// figcaption {
-// 	font-weight: 300;
-// 	font-size: 1.5rem;
-// 	line-height: 1.9rem;
-// }
-
-// li {
-// 	font-weight: 300;
-// 	font-size: 1.7rem;
-// 	line-height: 2.4rem;
-// }
-
-// .back-to-top {
-// 	font-family: 'Karla', sans-serif;
-// 	// font-family: 'Work Sans', sans-serif;
-
-// 	font-size: 1.8rem;
-// 	line-height: 1em;
-// 	color: inherit;
-// 	font-weight: 600;
-// 	letter-spacing: 0.13em;
-// 	text-decoration: none;
-// 	// text-transform: uppercase;
-// 	// letter-spacing: 0.04em;
-// 	color: #fff;
-// 	text-transform: uppercase;
-// }
-// 
-//
 html {
 	font-size: 62.5%;
 	text-rendering: optimizeLegibility !important
@@ -136,6 +59,7 @@ html {
 
 body {
 	padding: 2.5rem;
+	padding-top: 2rem;
 	background: url('../images/background-8.gif');
 }
 
@@ -144,37 +68,22 @@ a {
 }
 
 .intro {
-	margin-bottom: 9rem;
+	margin-bottom: 6rem;
 }
 
 
 .intro__tagline {
-	font-family: 'Work Sans', sans-serif;
-	// font-family: 'Merriweather', serif;
-	// font-family: 'Roboto Slab', serif;
-	// font-family: 'Droid Serif', serif;
-	// font-family: 'PT Serif', serif;
-	// font-family: 'Source Serif Pro', serif;
-	// font-family: 'Halant', serif;
-	// font-family: 'Sura', serif;
-	// font-family: 'Roboto', sans-serif;
-	// font-family: 'Titillium Web', sans-serif;
-		// font-family: 'Karla', sans-serif;
-		// font-family: 'Fira Sans', sans-serif;
-	// font-family: 'Kanit', sans-serif;
-		// font-family: 'Prompt', sans-serif;
-	// font-family: 'Work Sans', sans-serif;
-	// font-family: 'Inconsolata', monospace;
-	// font-family: 'Anonymous Pro', monospace;
-	// font-family: 'Fira Mono', monospace;
-	// font-family: 'PT Mono', monospace;
 	font-family: 'Poppins', sans-serif;
 	letter-spacing: -0.025em;
 	font-size: 6.8rem;
-	line-height: 6.8rem;
+	line-height: 1em;
 	font-weight: 700;
-	margin-bottom: 1.2rem;
+	margin-bottom: 0.6rem;
 	max-width: 1000px;
+
+	@media (max-width: $mobile) {
+		font-size: 6rem; 
+	}
 }
 
 .intro__name {
@@ -182,20 +91,29 @@ a {
 	font-family: 'Poppins', sans-serif;
 	font-weight: 200;
 	font-size: 4.2rem;
-	line-height: 4.2rem;
+	line-height: 1em;
 	letter-spacing: -0.025em;
+	
+	@media (max-width: $mobile) {
+		font-size: 3.3rem; 
+	}
 }
 
 .about {
-	max-width: 320px;
+	max-width: 340px;
 	margin-bottom: 14.0rem;
 	font-size: 1.35rem;
 	line-height: 1.4em;
 	font-family: 'Inconsolata', monospace;
+	
+	@media (max-width: $mobile) {
+		max-width: 85%;
+	}
 }
 
 .about a:hover {
 	color: $red;
+	text-shadow: 0 0 20px rgba($red, 0.6);
 }
 
 
@@ -214,33 +132,65 @@ a {
 	color: $red !important;
 	text-align: center;
 	background: #fff;
+	box-shadow: 0 0 50px 0 rgba(0,0,0,0.66);
+	cursor: none;
+
+	@media (max-width: $mobile) {
+		padding: 0 2.5rem 5rem 2.5rem;
+		border: 25px solid $red;
+	}
 }
+
+.selected-work * {
+	-webkit-user-select: none;
+}
+
 
 .selected-work__title {
 	margin: 8.5rem 0 7rem 0;
-	display: block;
+	display: inline-block;
 	font-family: 'Poppins', sans-serif;
 	letter-spacing: 0.15em;
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 1.5rem;
+	cursor: default;
 }
 
 .selected-work a {
 	text-decoration: none;
+	-webkit-user-select: none !important;
+	display: inline-block;
 }
+
+.selected-work a:hover {
+	text-shadow: 0 0 40px rgba($red, 0.8);
+}
+
+// .selected-work__list {
+// 	display: flex;
+// 	flex-direction: column;
+// }
 
 .selected-work__list-item {
 	margin-bottom: 7em;
+	display: inline-block;
+	transform-origin: 50% 50%;
 }
 
 .selected-work__list-item-title {
 	font-family: 'Poppins', sans-serif;
 	letter-spacing: -0.025em;
-	font-size: 4.5rem;
+	font-size: 4.2rem;
 	font-weight: 600;
 	line-height: 1.1em;
 	margin-bottom: 0.8rem;
+	line-height: 1em;
+	-webkit-user-select: none;
+	
+	@media (max-width: $mobile) {
+		font-size: 3.3rem;
+	}
 }
 
 .selected-work__span {
@@ -248,4 +198,29 @@ a {
 	font-size: 1.35rem;
 	line-height: 1.4em;
 	font-family: 'Inconsolata', monospace;
+}
+
+.selected-work canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,255,0.1);
+}
+
+.bomb {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 22px;
+	line-height: 1em;
+	margin-left: -8px;
+	margin-top: -8px;
+	pointer-events: none;
+}
+
+.selected-work:not(.selected-work--item-hover):hover .bomb {
+	display: block;
 }
