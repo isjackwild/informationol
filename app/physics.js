@@ -2,7 +2,7 @@ import { Events, Engine, World, Bodies, Body, Render, MouseConstraint, Mouse } f
 import Victor from 'victor';
 let raf, then, now, delta;
 let engine, render;
-let list, items, title;
+let list, items, titles, fire;
 let particles = [], walls = [], mouseConstraint, mouse;
 
 
@@ -12,16 +12,23 @@ class Particle {
 		this.el = el;
 		this.isStatic = isStatic;
 		this.rect = el.getBoundingClientRect();
+		if (isStatic) console.log(el.offsetTop);
 		this.body = null;
 		this.originPositionRelativeToWorld = {
 			x: 0,
-			y: el.offsetTop - list.offsetTop + 40 - listRect.height / 2,
+			y: el.offsetTop - list.offsetTop - listRect.height / 2,
 		}
+
+		if (!isStatic) this.originPositionRelativeToWorld.y += 40;
 
 		this.setupBody();
 		
 		this.onClick = this.onClick.bind(this);
 	}
+
+	// kill() {
+	// 	this.el.removeEventListener('click', this.onClick);
+	// }
 
 	setupBody() {
 		const pos = this.originPositionRelativeToWorld;
@@ -40,9 +47,9 @@ class Particle {
 	onClick() {
 		const mP = new Victor(mouse.mousedownPosition.x, mouse.mousedownPosition.y);
 		const dist = mP.distance(new Victor(this.body.position.x, this.body.position.y));
-		if (dist > 500) return;
+		if (dist > 400) return;
 		
-		const scale = 1 - dist / 500;
+		const scale = 1 - dist / 400;
 		const force = new Victor(
 			this.body.position.x - mP.x,
 			this.body.position.y - mP.y,
@@ -66,26 +73,20 @@ class Particle {
 export const init = () => {
 	list = document.getElementsByClassName('selected-work')[0];
 	items = [...document.getElementsByClassName('selected-work__list-item')];
-	title = document.getElementsByClassName('selected-work__title')[0]
+	titles = [...document.getElementsByClassName('selected-work__title')];
+	fire = [...document.getElementsByClassName('emoji--fire')];
 	const rect = list.getBoundingClientRect();
 
 	if (engine) {
 		Engine.clear(engine);
 		engine = undefined;
 		particles = [];
+		fire.forEach( (f) => f.parentElement.removeChild(f));
 	}
 
 	engine = Engine.create();
 	engine.world.gravity.x = 0;
 	engine.world.gravity.y = 0;
-
-	// render = Render.create({
-	// 	element: list,
-	// 	engine,
-	// 	options: {
-	// 		pixelRatio: 2,
-	// 	}
-	// });
 
 	const options = {
 		isStatic: true,
@@ -102,14 +103,16 @@ export const init = () => {
 	]
 
 	items.forEach(item => particles.push(new Particle(item, list)));
-
-	particles.push(new Particle(title, list, true))
+	titles.forEach(title => particles.push(new Particle(title, list, true)));
+	// particles.push(new Particle(title, list, true))
 	const bodies = [...walls, ...particles.map(item => item.body)];
 
 	mouse = Mouse.create(list);
 	mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
 	mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
 	mouse.element.removeEventListener("touchmove", mouse.mousemove);
+	mouse.element.removeEventListener("touchstart", mouse.mousedown);
+	mouse.element.removeEventListener("touchend", mouse.mouseup);
 	Mouse.setOffset(mouse, { x: rect.width / -2, y: rect.height / -2 });
 	mouseConstraint = MouseConstraint.create(engine, {
 		mouse,
@@ -117,6 +120,7 @@ export const init = () => {
 	
 	Events.on(mouseConstraint, 'mousedown', (e) => {
 		particles.forEach(p => p.onClick());
+		addFire(e);
 	});
 
 
@@ -130,6 +134,22 @@ export const init = () => {
     });
 }
 
+
+const addFire = (e) => {
+	const { x, y } = e.mouse.absolute;
+	console.log(x, y);
+	const span = document.createElement('span');
+	span.innerHTML = '🔥';
+	span.className = 'emoji emoji--fire';
+	span.style.top = `${y + list.offsetTop - 23}px`;
+	span.style.left = `${x + 8}px`;
+	list.parentNode.insertBefore(span, list);
+
+	const p = new Particle(span, list, true);
+	particles.push(p);
+	World.add(engine.world, p.body);
+	// list.appendChild(span);
+}
 
 
 

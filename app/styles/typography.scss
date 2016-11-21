@@ -111,7 +111,7 @@ a {
 	}
 }
 
-.about a:hover {
+.about a.hover {
 	color: $red;
 	text-shadow: 0 0 20px rgba($red, 0.6);
 }
@@ -127,13 +127,13 @@ a {
 
 
 .selected-work {
-	padding: 0 10rem 10rem 10rem;
+	padding: 3rem 10rem 10rem 10rem;
 	border: 35px solid $red;
 	color: $red !important;
 	text-align: center;
 	background: #fff;
 	box-shadow: 0 0 50px 0 rgba(0,0,0,0.66);
-	cursor: none;
+	cursor: pointer;
 
 	@media (max-width: $mobile) {
 		padding: 0 2.5rem 5rem 2.5rem;
@@ -147,7 +147,7 @@ a {
 
 
 .selected-work__title {
-	margin: 8.5rem 0 7rem 0;
+	margin: 5rem 0 7rem 0;
 	display: inline-block;
 	font-family: 'Poppins', sans-serif;
 	letter-spacing: 0.15em;
@@ -163,7 +163,7 @@ a {
 	display: inline-block;
 }
 
-.selected-work a:hover {
+.selected-work a.hover {
 	text-shadow: 0 0 40px rgba($red, 0.8);
 }
 
@@ -176,6 +176,10 @@ a {
 	margin-bottom: 7em;
 	display: inline-block;
 	transform-origin: 50% 50%;
+}
+
+.selected-work__list-item:last-child {
+	margin-bottom: 4rem;
 }
 
 .selected-work__list-item-title {
@@ -209,18 +213,30 @@ a {
 	background: rgba(0,0,255,0.1);
 }
 
-.bomb {
+.emoji {
+	font-size: 22px;
+	line-height: 1em;
+	pointer-events: none;
+	-webkit-user-select: none;
+}
+
+.emoji--bomb {
 	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
-	font-size: 22px;
-	line-height: 1em;
-	margin-left: -8px;
-	margin-top: -8px;
-	pointer-events: none;
+	margin-left: -15px;
+	margin-top: -22px;
+
+	@media (max-width: $mobile) {
+		display: none !important;
+	}
 }
 
-.selected-work:not(.selected-work--item-hover):hover .bomb {
+.emoji--fire {
+	position: absolute;
+}
+
+.selected-work:not(.selected-work--item-hover):hover .emoji--bomb {
 	display: block;
 }
