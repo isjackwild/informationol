@@ -12,14 +12,13 @@ class Particle {
 		this.el = el;
 		this.isStatic = isStatic;
 		this.rect = el.getBoundingClientRect();
-		if (isStatic) console.log(el.offsetTop);
 		this.body = null;
 		this.originPositionRelativeToWorld = {
 			x: 0,
-			y: el.offsetTop - list.offsetTop - listRect.height / 2,
+			y: el.offsetTop + (el.clientHeight * 0.5) - listRect.height / 2,
 		}
 
-		if (!isStatic) this.originPositionRelativeToWorld.y += 40;
+		// if (!isStatic) this.originPositionRelativeToWorld.y += 40;
 
 		this.setupBody();
 		
@@ -33,7 +32,7 @@ class Particle {
 	setupBody() {
 		const pos = this.originPositionRelativeToWorld;
 		const options = {
-			restitution: 0.6,
+			restitution: this.isStatic ? 0.8 : 0.5,
 			friction: 0,
 			frictionAir: 0,
 			frictionStatic: 0,
@@ -81,7 +80,7 @@ export const init = () => {
 		Engine.clear(engine);
 		engine = undefined;
 		particles = [];
-		fire.forEach( (f) => f.parentElement.removeChild(f));
+		fire.forEach((f) => f.parentElement.removeChild(f));
 	}
 
 	engine = Engine.create();
@@ -137,18 +136,20 @@ export const init = () => {
 
 const addFire = (e) => {
 	const { x, y } = e.mouse.absolute;
-	console.log(x, y);
 	const span = document.createElement('span');
 	span.innerHTML = '🔥';
 	span.className = 'emoji emoji--fire';
-	span.style.top = `${y + list.offsetTop - 23}px`;
-	span.style.left = `${x + 8}px`;
-	list.parentNode.insertBefore(span, list);
+	span.style.top = `${y - 23}px`;
+	span.style.left = `${x - 17}px`;
 
-	const p = new Particle(span, list, true);
-	particles.push(p);
-	World.add(engine.world, p.body);
-	// list.appendChild(span);
+	const firstChild = document.getElementsByClassName('selected-work__list')[0];
+	list.insertBefore(span, firstChild);
+
+	requestAnimationFrame(() => {
+		const p = new Particle(span, list, true);
+		particles.push(p);
+		World.add(engine.world, p.body);
+	})
 }
 
 
