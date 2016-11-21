@@ -2,11 +2,11 @@ import { init as initPhysics } from './physics.js';
 let bomb, list, links;
 
 const kickIt = () => {
+
 	const items = [...document.getElementsByClassName('selected-work__list-item')];
 	const links = [...document.getElementsByTagName('a')];
 	list = document.getElementsByClassName('selected-work')[0];
 	bomb = document.getElementsByClassName('emoji--bomb')[0];
-	console.log(bomb);
 
 	items.forEach((item) => {
 		item.addEventListener('mouseenter', onEnterListItem);
@@ -20,10 +20,10 @@ const kickIt = () => {
 		link.addEventListener('touchstart', onLinkEnter, false);
 		link.addEventListener('touchend', onLinkLeave, false);
 	});
+
 	requestAnimationFrame(() => {
 		initPhysics();
 	});
-
 	if (window.innerWidth > 768) {
 		window.addEventListener('mousemove', onMouseMove, false);
 		window.addEventListener('resize', () => {
@@ -44,11 +44,12 @@ const onMouseMove = (e) => {
 	bomb.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
 }
 
-const onEnterListItem = () => {
+const onEnterListItem = (e) => {
 	list.classList.add('selected-work--item-hover');
 }
 
 const onLinkEnter = (e) => {
+	e.stopPropagation();
 	e.currentTarget.classList.add('hover');
 }
 

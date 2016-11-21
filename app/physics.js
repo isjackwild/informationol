@@ -5,16 +5,23 @@ let engine, render;
 let list, items, titles, fire;
 let particles = [], walls = [], mouseConstraint, mouse;
 
+let BOMB_THRESHOLD;
+const BOMB_RESTITUTION = 1.5;
+const TITLE_RESTITUTION = 0.8;
+const ITEM_RESTITUTION = 0.5;
+const WALL_RESTITUTION = 1;
+
 
 class Particle {
-	constructor(el, list, isStatic) {
+	constructor(el, list, options) {
 		const listRect = list.getBoundingClientRect();
 		this.el = el;
-		this.isStatic = isStatic;
+		this.isStatic = options ? options.isStatic : false;
+		this.restitution = options ? options.options : ITEM_RESTITUTION;
 		this.rect = el.getBoundingClientRect();
 		this.body = null;
 		this.originPositionRelativeToWorld = {
-			x: 0,
+			x: el.offsetLeft + (el.clientWidth * 0.5) - listRect.width / 2,
 			y: el.offsetTop + (el.clientHeight * 0.5) - listRect.height / 2,
 		}
 
@@ -32,7 +39,7 @@ class Particle {
 	setupBody() {
 		const pos = this.originPositionRelativeToWorld;
 		const options = {
-			restitution: this.isStatic ? 0.8 : 0.5,
+			restitution: this.restitution,
 			friction: 0,
 			frictionAir: 0,
 			frictionStatic: 0,
@@ -43,12 +50,11 @@ class Particle {
 		// this.body.position = new Victor(pos.x, pos.y);
 	}
 
-	onClick() {
-		const mP = new Victor(mouse.mousedownPosition.x, mouse.mousedownPosition.y);
+	onClick(x, y) {
+		const mP = new Victor(x, y);
 		const dist = mP.distance(new Victor(this.body.position.x, this.body.position.y));
-		if (dist > 400) return;
-		
-		const scale = 1 - dist / 400;
+		if (dist > BOMB_THRESHOLD) return;
+		const scale = 1 - dist / BOMB_THRESHOLD;
 		const force = new Victor(
 			this.body.position.x - mP.x,
 			this.body.position.y - mP.y,
@@ -70,6 +76,8 @@ class Particle {
 }
 
 export const init = () => {
+	BOMB_THRESHOLD = window.innerWidth > 1440 ? 600 : 400;
+
 	list = document.getElementsByClassName('selected-work')[0];
 	items = [...document.getElementsByClassName('selected-work__list-item')];
 	titles = [...document.getElementsByClassName('selected-work__title')];
@@ -89,7 +97,7 @@ export const init = () => {
 
 	const options = {
 		isStatic: true,
-		restitution: 1,
+		restitution: WALL_RESTITUTION,
 	}
 
 	const border = window.innerWidth <= 768 ? 25 : 35;
@@ -102,7 +110,7 @@ export const init = () => {
 	]
 
 	items.forEach(item => particles.push(new Particle(item, list)));
-	titles.forEach(title => particles.push(new Particle(title, list, true)));
+	titles.forEach(title => particles.push(new Particle(title, list, { isStatic: true, restitution: TITLE_RESTITUTION })));
 	// particles.push(new Particle(title, list, true))
 	const bodies = [...walls, ...particles.map(item => item.body)];
 
@@ -117,10 +125,15 @@ export const init = () => {
 		mouse,
 	});
 	
-	Events.on(mouseConstraint, 'mousedown', (e) => {
-		particles.forEach(p => p.onClick());
-		addFire(e);
-	});
+	// Events.on(mouseConstraint, 'mousedown', (e) => {
+	// 	addFire(e);
+	// });
+	// 
+	
+	list.removeEventListener('click', addFire);
+	list.removeEventListener('touchstart', addFire);
+	list.addEventListener('click', addFire);
+	list.addEventListener('touchstart', addFire);
 
 
 	World.add(engine.world, bodies);
@@ -135,21 +148,38 @@ export const init = () => {
 
 
 const addFire = (e) => {
-	const { x, y } = e.mouse.absolute;
+	const rect = list.getBoundingClientRect();
+	const x = e.touches ? e.touches[0].clientX : e.clientX;
+	const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+	const elX = x;
+	const elY = y - rect.top;
+
+	const worldX = elX - (rect.width / 2);
+	const worldY = elY - (rect.height / 2);
+
+	// const { x, y } = e.mouse.absolute;
+	// const { x: offsetX, y: offsetY } = e.mouse.mousedownPosition;
+
+	particles.forEach(p => p.onClick(worldX, worldY));
+
 	const span = document.createElement('span');
 	span.innerHTML = '🔥';
 	span.className = 'emoji emoji--fire';
-	span.style.top = `${y - 23}px`;
-	span.style.left = `${x - 17}px`;
+	span.style.left = `${elX - 43}px`;
+	span.style.top = `${elY - 23}px`;
 
 	const firstChild = document.getElementsByClassName('selected-work__list')[0];
 	list.insertBefore(span, firstChild);
 
 	requestAnimationFrame(() => {
-		const p = new Particle(span, list, true);
+		const p = new Particle(span, list, { isStatic: true, restitution: BOMB_RESTITUTION });
 		particles.push(p);
 		World.add(engine.world, p.body);
-	})
+		const sound = new Audio('assets/sound/gun-short.mp3');
+		sound.volume = 0.22;
+		sound.play();
+	});
 }
 
 
