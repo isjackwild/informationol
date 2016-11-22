@@ -1,14 +1,17 @@
-import { init as initPhysics } from './physics.js';
-let bomb, selectedWork, links, menu, menuFlipButton;
+import { init as initPhysics, pause as PausePhysics, play as playPhysics } from './physics.js';
+import { init as initDrawing } from './drawing.js';
+let customCursor, selectedWork, links, menu, menuFlipButton;
+let frontSide = true;
 
 const kickIt = () => {
 	const items = [...document.getElementsByClassName('selected-work__list-item')];
 	const links = [...document.getElementsByTagName('a')];
 	selectedWork = document.getElementsByClassName('menu__selected-work')[0];
-	bomb = document.getElementsByClassName('emoji--bomb')[0];
+	customCursor = document.getElementsByClassName('custom-cursor')[0];
 	menu = document.getElementsByClassName('menu')[0];
 	menuFlipButton = document.getElementsByClassName('menu__flip-button')[0];
-
+	// flipMenu();
+	
 	items.forEach((item) => {
 		item.addEventListener('mouseenter', onEnterListItem);
 		item.addEventListener('mouseleave', onLeaveListItem);
@@ -25,6 +28,7 @@ const kickIt = () => {
 
 	requestAnimationFrame(() => {
 		initPhysics();
+		initDrawing();
 	});
 	if (window.innerWidth > 768) {
 		window.addEventListener('mousemove', onMouseMove, false);
@@ -43,7 +47,7 @@ const kickIt = () => {
 }
 
 const onMouseMove = (e) => {
-	bomb.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+	customCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
 }
 
 const onEnterListItem = (e) => {
@@ -65,6 +69,9 @@ const onLeaveListItem = () => {
 
 const flipMenu = () => {
 	menu.classList.toggle('menu--flipped');
+	frontSide = !frontSide;
+	customCursor.classList.toggle('custom-cursor--bomb');
+	customCursor.classList.toggle('custom-cursor--pencil');
 }
 
 

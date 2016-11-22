@@ -4,6 +4,7 @@ let raf, then, now, delta;
 let engine, render;
 let list, items, titles, fire;
 let particles = [], walls = [], mouseConstraint, mouse;
+let enabled = true;
 
 let BOMB_THRESHOLD;
 const BOMB_RESTITUTION = 1.5;
@@ -126,11 +127,6 @@ export const init = () => {
 		mouse,
 	});
 	
-	// Events.on(mouseConstraint, 'mousedown', (e) => {
-	// 	addFire(e);
-	// });
-	// 
-	
 	list.removeEventListener('click', addFire);
 	list.removeEventListener('touchstart', addFire);
 	list.addEventListener('click', addFire);
@@ -142,11 +138,19 @@ export const init = () => {
 	Engine.run(engine);
 
 	Events.on(engine, 'afterUpdate', () => {
+		if (!enabled) return;
 		const now =  new Date().getTime();
 		particles.forEach(p => p.update( now ));
     });
 }
 
+export const pause = () => {
+	enabled = false;
+}
+
+export const resume = () => {
+	enabled = true;
+}
 
 const addFire = (e) => {
 	const rect = list.getBoundingClientRect();
