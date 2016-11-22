@@ -69,16 +69,17 @@ class Particle {
 		Body.applyForce(this.body, { x: 0, y: 0 }, { x, y });
 
 		this.el.style.transform = `
-			translate3d(${this.body.position.x - this.originPositionRelativeToWorld.x}px, ${this.body.position.y - this.originPositionRelativeToWorld.y}px, 0px)
+			translate(${this.body.position.x - this.originPositionRelativeToWorld.x}px, ${this.body.position.y - this.originPositionRelativeToWorld.y}px)
 			rotate(${this.body.angle * 57.2958}deg)
 		`;
 	}
 }
 
 export const init = () => {
+	// return;
 	BOMB_THRESHOLD = window.innerWidth > 1440 ? 600 : 400;
 
-	list = document.getElementsByClassName('selected-work')[0];
+	list = document.getElementsByClassName('menu__selected-work')[0];
 	items = [...document.getElementsByClassName('selected-work__list-item')];
 	titles = [...document.getElementsByClassName('selected-work__title')];
 	fire = [...document.getElementsByClassName('emoji--fire')];
@@ -169,7 +170,7 @@ const addFire = (e) => {
 	span.style.left = `${elX - 43}px`;
 	span.style.top = `${elY - 23}px`;
 
-	const firstChild = document.getElementsByClassName('selected-work__list')[0];
+	const firstChild = document.getElementsByClassName('selected-work')[0];
 	list.insertBefore(span, firstChild);
 
 	requestAnimationFrame(() => {

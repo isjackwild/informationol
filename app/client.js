@@ -1,12 +1,13 @@
 import { init as initPhysics } from './physics.js';
-let bomb, list, links;
+let bomb, selectedWork, links, menu, menuFlipButton;
 
 const kickIt = () => {
-
 	const items = [...document.getElementsByClassName('selected-work__list-item')];
 	const links = [...document.getElementsByTagName('a')];
-	list = document.getElementsByClassName('selected-work')[0];
+	selectedWork = document.getElementsByClassName('menu__selected-work')[0];
 	bomb = document.getElementsByClassName('emoji--bomb')[0];
+	menu = document.getElementsByClassName('menu')[0];
+	menuFlipButton = document.getElementsByClassName('menu__flip-button')[0];
 
 	items.forEach((item) => {
 		item.addEventListener('mouseenter', onEnterListItem);
@@ -20,6 +21,7 @@ const kickIt = () => {
 		link.addEventListener('touchstart', onLinkEnter, false);
 		link.addEventListener('touchend', onLinkLeave, false);
 	});
+	menuFlipButton.addEventListener('click', flipMenu, false);
 
 	requestAnimationFrame(() => {
 		initPhysics();
@@ -41,11 +43,11 @@ const kickIt = () => {
 }
 
 const onMouseMove = (e) => {
-	bomb.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+	bomb.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
 }
 
 const onEnterListItem = (e) => {
-	list.classList.add('selected-work--item-hover');
+	selectedWork.classList.add('selected-work--item-hover');
 }
 
 const onLinkEnter = (e) => {
@@ -58,7 +60,11 @@ const onLinkLeave = (e) => {
 }
 
 const onLeaveListItem = () => {
-	list.classList.remove('selected-work--item-hover');
+	selectedWork.classList.remove('selected-work--item-hover');
+}
+
+const flipMenu = () => {
+	menu.classList.toggle('menu--flipped');
 }
 
 
