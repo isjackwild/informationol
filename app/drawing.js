@@ -1,6 +1,6 @@
 let canvas, ctx;
 let mouseDown = false;
-let colour = "orange";
+let colour = "red";
 let lastX = 0, lastY = 0;
 let devicePixelRatio = 1, backingStoreRatio = 1, ratio;
 let colours;
@@ -55,12 +55,12 @@ const onResize = () => {
 	canvas.width = canvas.clientWidth * devicePixelRatio;
 	canvas.height = canvas.clientHeight * devicePixelRatio;
 	ctx.strokeStyle = colour;
-	ctx.lineWidth = 30;
+	ctx.lineWidth = 40;
 	ctx.lineJoin = 'round';
 }
 
 const chooseColour = (e) => {
-	const current = document.getElementsByClassName('colour-picker__option--selected')[0].classList.remove('colour-picker__option--selected');
+	const current = document.getElementsByClassName('colour-picker__option--selected')[0].classList.remove('colour-picker__option--selected')
 	e.currentTarget.classList.add('colour-picker__option--selected');
 	ctx.strokeStyle = e.currentTarget.dataset.colour;
 }

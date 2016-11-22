@@ -73,6 +73,9 @@ body {
 	padding-top: 2rem;
 	background-image: url('../images/background-8.gif');
 	background-size: 100% auto;
+	overflow: scroll;
+	position: relative;
+	height: 100%;
 
 	@media (max-width: $mobile) {
 		padding: 1.5rem;
@@ -182,7 +185,7 @@ a {
 }
 
 .menu {
-	transition: transform 0.66s ease;
+	transition: transform 1.5s ease;
 	transform-style: preserve-3d;
 	text-align: center;
 	color: $red !important;
@@ -279,6 +282,7 @@ a {
 	font-weight: 700;
 	font-size: 1.5rem;
 	cursor: default;
+	pointer-events: none;
 
 	@media (min-width: $xl) {
 		font-size: 1.7rem;
@@ -409,6 +413,20 @@ a {
 	transform: rotateY(180deg);
 	backface-visibility: hidden;
 	overflow: hidden;
+	display: flex;
+}
+
+.about {
+	display: flex;
+	flex-direction: column;
+}
+
+.about__flex-wrapper {
+	position: relative;
+	height: 100%;
+	flex-direction: column;
+	display: flex;
+	pointer-events: none;
 }
 
 .about__canvas {
@@ -424,27 +442,73 @@ a {
 	-webkit-user-select: none;
 }
 
+.about__image {
+	// background: green;
+	flex-grow: 1;
+	margin-bottom: 8rem;
+	pointer-events: none;
+}
+
+.about__tagline {
+	font-family: 'Poppins', sans-serif;
+	letter-spacing: -0.025em;
+	font-size: 6.2rem;
+	font-weight: 600;
+	line-height: 1.1em;
+	margin-bottom: 5.5rem;
+	display: inline-block;
+	pointer-events: none;
+	-webkit-user-select: none;
+}
+
 .about__text {
 	position: relative;
-	font-size: 1.35rem;
+	font-size: 1.7rem;
 	line-height: 1.4em;
 	font-family: 'Inconsolata', monospace;
-	max-width: 600px;
+	// max-width: 600px;
 	margin: auto;
+	pointer-events: none;
+	margin-bottom: 10rem;
+}
+
+.about__text a {
+	pointer-events: auto;
+}
+
+.about__text a.hover {
+	color: $red;
+	text-shadow: 0 0 20px rgba($red, 0.6);
+}
+
+.about__para {
+	max-width: 520px;
+	margin: auto;
+	margin-bottom: 1em;
+	-webkit-user-select: none;
+}
+
+.about__contact {
+	margin: 0 1em;
+	-webkit-user-select: none;
 }
 
 .colour-picker {
-	position: absolute;
-	top: 4.5rem;
+	position: fixed;
 	left: 4.5rem;
 	font-size: 0;
+	width: 60px;
+	position: absolute;
+	top: 50vh;
+	transform: translateY(-50%);
+
 }
 
 .colour-picker__option {
 	width: 50px;
 	height: 50px;
 	background: red;
-	margin-right: 10px;
+	margin-bottom: 10px;
 	border-radius: 1000px;
 	display: inline-block;
 	cursor: pointer;

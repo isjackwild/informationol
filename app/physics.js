@@ -65,9 +65,9 @@ class Particle {
 	}
 	
 	update(time) {
-		const x = Math.cos(time) / 2000;
-		const y = Math.sin(time) / 2000;
-		Body.applyForce(this.body, { x: 0, y: 0 }, { x, y });
+		// const x = Math.cos(time) / 2000;
+		// const y = Math.sin(time) / 2000;
+		// Body.applyForce(this.body, { x: 0, y: 0 }, { x, y });
 
 		this.el.style.transform = `
 			translate(${this.body.position.x - this.originPositionRelativeToWorld.x}px, ${this.body.position.y - this.originPositionRelativeToWorld.y}px)
