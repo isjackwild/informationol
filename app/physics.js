@@ -55,7 +55,9 @@ class Particle {
 		const mP = new Victor(x, y);
 		const dist = mP.distance(new Victor(this.body.position.x, this.body.position.y));
 		if (dist > BOMB_THRESHOLD) return;
-		const scale = 1 - dist / BOMB_THRESHOLD;
+		let scale = 1 - dist / BOMB_THRESHOLD;
+		if (window.innerWidth > 1440) scale *= 1.5;
+
 		const force = new Victor(
 			this.body.position.x - mP.x,
 			this.body.position.y - mP.y,
@@ -78,7 +80,7 @@ class Particle {
 
 export const init = () => {
 	// return;
-	BOMB_THRESHOLD = window.innerWidth > 1440 ? 600 : 400;
+	BOMB_THRESHOLD = window.innerWidth > 1440 ? 800 : 400;
 
 	list = document.getElementsByClassName('menu__selected-work')[0];
 	items = [...document.getElementsByClassName('selected-work__list-item')];

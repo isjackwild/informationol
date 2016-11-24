@@ -1,17 +1,18 @@
 import { init as initPhysics, pause as PausePhysics, play as playPhysics } from './physics.js';
 import { init as initDrawing } from './drawing.js';
-let customCursor, selectedWork, links, menu, menuFlipButton;
+let customCursor, selectedWork, links, menu, menuFlipButton, colourPicker;
 let frontSide = true;
 
 const kickIt = () => {
 	const items = [...document.getElementsByClassName('selected-work__list-item')];
 	const links = [...document.getElementsByTagName('a')];
+	colourPicker = document.getElementsByClassName('colour-picker')[0];
 	selectedWork = document.getElementsByClassName('menu__selected-work')[0];
 	customCursor = document.getElementsByClassName('custom-cursor')[0];
 	menu = document.getElementsByClassName('menu')[0];
 	menuFlipButton = document.getElementsByClassName('menu__flip-button')[0];
 	// flipMenu();
-	
+
 	items.forEach((item) => {
 		item.addEventListener('mouseenter', onEnterListItem);
 		item.addEventListener('mouseleave', onLeaveListItem);
@@ -25,6 +26,7 @@ const kickIt = () => {
 		link.addEventListener('touchend', onLinkLeave, false);
 	});
 	menuFlipButton.addEventListener('click', flipMenu, false);
+	document.body.addEventListener('scroll', onScroll, false);
 
 	requestAnimationFrame(() => {
 		initPhysics();
@@ -70,8 +72,13 @@ const onLeaveListItem = () => {
 const flipMenu = () => {
 	menu.classList.toggle('menu--flipped');
 	frontSide = !frontSide;
+	colourPicker.classList.toggle('colour-picker--visible');
 	customCursor.classList.toggle('custom-cursor--bomb');
 	customCursor.classList.toggle('custom-cursor--pencil');
+}
+
+const onScroll = (e) => {
+	console.log(document.body.scrollTop);
 }
 
 

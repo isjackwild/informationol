@@ -24,6 +24,7 @@ gulp.task('build:scss', function() {
 		return gulp.src(SCSS_SRC_FILE)
 			.pipe(sourcemaps.init())
 			.pipe(sass(({ outputStyle: 'expanded' })).on('error', sass.logError))
+			.pipe(autoprefixer('last 6 versions', '> 0.5%', 'ie 8', 'ie 7'))
 			.pipe(sourcemaps.write())
 			.pipe(gulp.dest(SCSS_BUILD_FOLDER));
 	}

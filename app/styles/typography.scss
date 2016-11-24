@@ -71,7 +71,7 @@ html {
 body {
 	padding: 2.5rem;
 	padding-top: 2rem;
-	background-image: url('../images/background-8.gif');
+	background-image: url('../images/background-5.gif');
 	background-size: 100% auto;
 	overflow: scroll;
 	position: relative;
@@ -90,6 +90,7 @@ a {
 .perspective-wrapper {
 	perspective: 10000px;
 }
+
 
 // .intro {
 // 	margin-bottom: 6rem;
@@ -177,22 +178,25 @@ a {
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: 100px;
-	height: 100px;
-	background: orange;
+	width: 200px;
+	height: 200px;
+	// background: rgba(#000000, 0.2);
 	z-index: 2;
 	cursor: pointer;
 }
 
 .menu {
-	transition: transform 1.5s ease;
+	transition: transform 1s ease;
 	transform-style: preserve-3d;
 	text-align: center;
 	color: $red !important;
+	will-change: transform;
+	transform: rotateY(0) translateZ(0);
+	cursor: pointer;
 }
 
 .menu--flipped {
-	transform: rotateY(180deg);
+	transform: rotateY(180deg) translateZ(0);
 }
 
 .menu__section {
@@ -200,13 +204,14 @@ a {
 	transform-style: preserve-3d;
 	padding: 6.5rem 10rem 10rem 10rem;
 	background: #fff;
+	box-shadow: 0 0 50px 0 rgba(0,0,0,0.66);
+	cursor: pointer;
 	// overflow: hidden;
 }
 
 .menu__selected-work {
 	// border: 35px solid $red;
 	text-align: center;
-	box-shadow: 0 0 50px 0 rgba(0,0,0,0.66);
 	cursor: pointer;
 	position: relative;
 	box-sizing: content-box;
@@ -221,6 +226,66 @@ a {
 		 padding: 10rem 15rem 16rem 15rem;
 	}
 }
+
+.menu__corner {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 350px;
+	height: 350px;
+	overflow: hidden;
+}
+
+@keyframes flip {
+	0% {
+		transform: rotate(-45deg);
+	}
+	80% {
+		transform: rotate(-45deg);
+	}
+	85% {
+		transform: rotate(-45deg) translateX(10px);
+	}
+	90% {
+		transform: rotate(-45deg);
+	}
+	95% {
+		transform: rotate(-45deg) translateX(10px);
+	}
+	100% {
+		transform: rotate(-45deg);
+	}
+}
+
+
+
+.menu__flip-icon {
+	position: absolute;
+	top: 4.6rem;
+	right: 3rem;
+	line-height: 1em;
+	display: inline-block;
+	font-size: 7rem;
+	animation-duration: 7s;
+	animation-name: flip;
+	animation-iteration-count: infinite;
+}
+
+.menu__corner:before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: blue;
+	content: '';
+	transform: translate(50%, -50%) rotate(45deg);
+	background: linear-gradient(to bottom, rgba(0,0,0,1) 50%,rgba(0,0,0,0) 100%);
+	opacity: 0;
+}
+
+
+
 
 .border {
 	position: absolute;
@@ -286,7 +351,7 @@ a {
 
 	@media (min-width: $xl) {
 		font-size: 1.7rem;
-		margin: 7rem 0 11rem 0;
+		margin: 10rem 0 13rem 0;
 	}
 }
 
@@ -314,7 +379,7 @@ a {
 	backface-visibility: hidden;
 
 	@media (min-width: $xl) {
-		margin-bottom: 9em;
+		margin-bottom: 11em;
 	}
 }
 
@@ -342,7 +407,7 @@ a {
 	}
 
 	@media (min-width: $xl) {
-		font-size: 6rem;
+		font-size: 7rem;
 		margin-bottom: 1.2rem;
 	}
 }
@@ -354,7 +419,7 @@ a {
 	font-family: 'Inconsolata', monospace;
 
 	@media (min-width: $xl) {
-		font-size: 1.6rem;
+		font-size: 1.8rem;
 	}
 }
 
@@ -365,7 +430,7 @@ a {
 	-webkit-user-select: none;
 
 	@media (min-width: $xl) {
-		font-size: 3rem;
+		font-size: 5rem;
 	}
 }
 
@@ -378,6 +443,7 @@ a {
 	margin-top: -22px;
 	pointer-events: none;
 	-webkit-user-select: none;
+	cursor: pointer;
 
 	@media (max-width: $mobile) {
 		display: none !important;
@@ -419,6 +485,8 @@ a {
 .about {
 	display: flex;
 	flex-direction: column;
+	margin: auto;
+	width: 100%;
 }
 
 .about__flex-wrapper {
@@ -443,7 +511,10 @@ a {
 }
 
 .about__image {
-	// background: green;
+	background: url("../images/me-trace.svg");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
 	flex-grow: 1;
 	margin-bottom: 8rem;
 	pointer-events: none;
@@ -454,11 +525,17 @@ a {
 	letter-spacing: -0.025em;
 	font-size: 6.2rem;
 	font-weight: 600;
-	line-height: 1.1em;
+	line-height: 1.05em;
 	margin-bottom: 5.5rem;
 	display: inline-block;
 	pointer-events: none;
 	-webkit-user-select: none;
+	max-width: 1400px;
+
+	@media (min-width: $xl) {
+		font-size: 10rem;
+		margin-bottom: 10rem;
+	}
 }
 
 .about__text {
@@ -470,6 +547,13 @@ a {
 	margin: auto;
 	pointer-events: none;
 	margin-bottom: 10rem;
+	margin-top: 12rem;
+
+	@media (min-width: $xl) {
+		margin-top: 20rem;
+		margin-bottom: 15rem;
+		font-size: 2.2rem;
+	}
 }
 
 .about__text a {
@@ -486,6 +570,10 @@ a {
 	margin: auto;
 	margin-bottom: 1em;
 	-webkit-user-select: none;
+
+	@media (min-width: $xl) {
+		max-width: 750px;
+	}
 }
 
 .about__contact {
@@ -493,15 +581,26 @@ a {
 	-webkit-user-select: none;
 }
 
+
 .colour-picker {
 	position: fixed;
-	left: 4.5rem;
+	left: 8rem;
 	font-size: 0;
 	width: 60px;
-	position: absolute;
 	top: 50vh;
-	transform: translateY(-50%);
+	transition: transform 0.33s ease;
+	transition-delay: 0s;
+	transform: translateY(-50%) translateX(-15rem);
 
+	@media (min-width: $xl) {
+		left: 10rem;
+		transform: translateY(-50%) translateX(-20rem);
+	}
+}
+
+.colour-picker--visible {
+	transition-delay: 0.5s;
+	transform: translateY(-50%);
 }
 
 .colour-picker__option {
@@ -514,6 +613,11 @@ a {
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
+
+	@media (min-width: $xl) {
+		width: 70px;
+		height: 70px;
+	}
 }
 
 .colour-picker__option:hover {
@@ -540,22 +644,79 @@ a {
 	background: red;
 }
 
-.colour-picker__option[data-colour="green"] {
-	background: green;
+.colour-picker__option[data-colour="brown"] {
+	background: brown;
 }
 
-.colour-picker__option[data-colour="blue"] {
-	background: blue;
+.colour-picker__option[data-colour="lightblue"] {
+	background: lightblue;
 }
 
 .colour-picker__option[data-colour="pink"] {
 	background: pink;
 }
 
-.colour-picker__option[data-colour="orange"] {
-	background: orange;
+.colour-picker__option[data-colour="black"] {
+	background: black;
 }
 
-.colour-picker__option[data-colour="purple"] {
-	background: purple;
+.colour-picker__option[data-colour="green"] {
+	background: green;
 }
+
+
+
+
+
+$offset: -12px;
+$count: 100;
+$duration: 4.0;
+
+
+// @keyframes wave {
+// 	0% {
+// 		transform: translateY( 0 );
+// 	}
+// 	50% {
+// 		transform: translateY( 0 );
+// 	}
+// 	100% {
+// 		transform: translateY( $offset );
+// 	}
+// }
+
+@keyframes wave {
+	0% {
+		transform: translateY( 0 );
+	}
+	90% {
+		transform: translateY( 0 );
+	}
+	95% {
+		transform: translateY( $offset );
+	}
+	100% {
+		transform: translateY( 0 );
+	}
+}
+
+.selected-work__title--wave {
+	display: inline-block;
+}
+
+.selected-work__title--wave span {
+	display: inline-block;
+	animation-duration: #{$duration}s;
+	animation-name: wave;
+	animation-iteration-count: infinite;
+	// animation-direction: alternate;
+}
+
+
+@for $i from 0 to $count {
+  .selected-work__title--wave :nth-child( #{$count}n + #{$i} ) {
+      animation-delay : 
+        -#{($count - $i) * 2 * $duration / $count }s;
+  }
+}
+

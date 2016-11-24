@@ -5,6 +5,7 @@ let lastX = 0, lastY = 0;
 let devicePixelRatio = 1, backingStoreRatio = 1, ratio;
 let colours;
 
+// TODO!!!! FUNZONE text animation
 
 export const init = () => {
 	devicePixelRatio = window.devicePixelRatio || 1,
@@ -55,7 +56,7 @@ const onResize = () => {
 	canvas.width = canvas.clientWidth * devicePixelRatio;
 	canvas.height = canvas.clientHeight * devicePixelRatio;
 	ctx.strokeStyle = colour;
-	ctx.lineWidth = 40;
+	ctx.lineWidth = 70;
 	ctx.lineJoin = 'round';
 }
 
