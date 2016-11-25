@@ -98,9 +98,9 @@ a {
 	}
 
 	@media (min-width: $xl) {
-		max-width: 1300px;
+		max-width: 1500px;
 		margin-bottom: 1.5rem;
-		font-size: 10rem;
+		font-size: 12rem;
 	}
 }
 
@@ -133,8 +133,8 @@ a {
 	}
 
 	@media (min-width: $xl) {
-		max-width: 460px;
-		font-size: 1.6rem;
+		max-width: 490px;
+		font-size: 1.8rem;
 		margin-bottom: 25.0rem;
 	}
 }
@@ -263,7 +263,7 @@ a {
 	transform-origin: 50% 50%;
 
 	@media (min-width: $xl) {
-		margin-bottom: 9em;
+		margin-bottom: 10em;
 	}
 }
 
@@ -286,8 +286,8 @@ a {
 	}
 
 	@media (min-width: $xl) {
-		font-size: 6rem;
-		margin-bottom: 1.2rem;
+		font-size: 8rem;
+		margin-bottom: 1.5rem;
 	}
 }
 
@@ -298,7 +298,7 @@ a {
 	font-family: 'Inconsolata', monospace;
 
 	@media (min-width: $xl) {
-		font-size: 1.6rem;
+		font-size: 1.8rem;
 	}
 }
 
@@ -318,7 +318,7 @@ a {
 	-webkit-user-select: none;
 
 	@media (min-width: $xl) {
-		font-size: 3rem;
+		font-size: 4rem;
 	}
 }
 
@@ -335,10 +335,68 @@ a {
 	}
 }
 
+.emoji--bomb span {
+	transition: transform 0.07s ease;
+	display: inline-block;
+}
+
+.emoji--bomb:after {
+	content: '';
+	position: absolute;
+	left: 1px;
+	bottom: -10px;
+	background: black;
+	filter: blur(5px);
+	width: 70%;
+	height: 8px;
+	border-radius: 100px;
+	box-shadow: 0 0 5px 0 rgba(#000, 0.5);
+	transition: transform 0.07s ease, opacity 0.07s ease;
+	opacity: 0.25;
+	transform-origin: center center;
+}
+
+.emoji--bomb.touched span{
+	transform: translateY(10px);
+}
+
+
+.emoji--bomb.touched:after{
+	transform: scale(0.7);
+	opacity: 0.187;
+}
+
 .emoji--fire {
 	position: absolute;
 }
 
 .selected-work:not(.selected-work--item-hover):hover .emoji--bomb {
 	display: block;
+}
+
+@keyframes sprite {
+	from { background-position: 0px}
+	to { background-position: -600px}
+}
+
+.explosion {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	background-image: url('../images/burn.gif');
+	background-size: contain;
+	z-index:2;
+}
+
+.explosion__boom {
+	width: 40px;
+	height: 75px;
+	background-image: url('../images/spritesheet.gif');
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	animation: sprite 0.8s steps(15) 1;
+	animation-fill-mode: forwards;
+	position: absolute;
+	bottom: 0;
+	left: -6px;
 }

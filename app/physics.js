@@ -2,8 +2,8 @@ import { Events, Engine, World, Bodies, Body, Render, MouseConstraint, Mouse } f
 import Victor from 'victor';
 let raf, then, now, delta;
 let engine, render;
-let list, items, titles, fire;
-let particles = [], walls = [], mouseConstraint, mouse;
+let list, items, titles, fire, bomb;
+let particles = [], walls = [], explosions = [], mouseConstraint, mouse;
 
 let BOMB_THRESHOLD;
 const BOMB_RESTITUTION = 1.5;
@@ -25,16 +25,9 @@ class Particle {
 			y: el.offsetTop + (el.clientHeight * 0.5) - listRect.height / 2,
 		}
 
-		// if (!isStatic) this.originPositionRelativeToWorld.y += 40;
-
 		this.setupBody();
-		
 		this.onClick = this.onClick.bind(this);
 	}
-
-	// kill() {
-	// 	this.el.removeEventListener('click', this.onClick);
-	// }
 
 	setupBody() {
 		const pos = this.originPositionRelativeToWorld;
@@ -47,14 +40,14 @@ class Particle {
 		}
 
 		this.body = Bodies.rectangle(pos.x, pos.y, this.rect.width, this.rect.height, options);
-		// this.body.position = new Victor(pos.x, pos.y);
 	}
 
 	onClick(x, y) {
 		const mP = new Victor(x, y);
 		const dist = mP.distance(new Victor(this.body.position.x, this.body.position.y));
 		if (dist > BOMB_THRESHOLD) return;
-		const scale = 1 - dist / BOMB_THRESHOLD;
+		let scale = 1 - dist / BOMB_THRESHOLD;
+		if (window.innerWidth > 1440) scale *= 1.8;
 		const force = new Victor(
 			this.body.position.x - mP.x,
 			this.body.position.y - mP.y,
@@ -64,10 +57,6 @@ class Particle {
 	}
 	
 	update(time) {
-		// const x = Math.cos(time) / 2000;
-		// const y = Math.sin(time) / 2000;
-		// Body.applyForce(this.body, { x: 0, y: 0 }, { x, y });
-
 		this.el.style.transform = `
 			translate3d(${this.body.position.x - this.originPositionRelativeToWorld.x}px, ${this.body.position.y - this.originPositionRelativeToWorld.y}px, 0px)
 			rotate(${this.body.angle * 57.2958}deg)
@@ -75,9 +64,11 @@ class Particle {
 	}
 }
 
-export const init = () => {
-	BOMB_THRESHOLD = window.innerWidth > 1440 ? 600 : 400;
 
+export const init = () => {
+	BOMB_THRESHOLD = window.innerWidth > 1440 ? 800 : 400;
+
+	bomb = document.getElementsByClassName('emoji--bomb')[0];
 	list = document.getElementsByClassName('selected-work')[0];
 	items = [...document.getElementsByClassName('selected-work__list-item')];
 	titles = [...document.getElementsByClassName('selected-work__title')];
@@ -133,6 +124,8 @@ export const init = () => {
 	list.removeEventListener('click', addFire);
 	list.removeEventListener('touchstart', addFire);
 	list.addEventListener('click', addFire);
+	list.addEventListener('mousedown', onMouseDown);
+	list.addEventListener('mouseup', onMouseUp);
 	list.addEventListener('touchstart', addFire);
 
 
@@ -163,23 +156,40 @@ const addFire = (e) => {
 
 	particles.forEach(p => p.onClick(worldX, worldY));
 
-	const span = document.createElement('span');
-	span.innerHTML = '🔥';
-	span.className = 'emoji emoji--fire';
-	span.style.left = `${elX - 43}px`;
-	span.style.top = `${elY - 23}px`;
+	// const span = document.createElement('span');
+	// span.innerHTML = '🔥';
+	// span.className = 'emoji emoji--fire';
+	// span.style.left = `${elX - 45}px`;
+	// span.style.top = `${elY - 6}px`;
+	// 
+	const explosion = document.createElement('span');
+	explosion.className = 'explosion';
+	const explosionBoom = document.createElement('span');
+	explosionBoom.className = 'explosion__boom';
+	explosion.appendChild(explosionBoom);
+
+	explosion.style.left = `${elX - 42}px`;
+	explosion.style.top = `${elY - 15}px`;
 
 	const firstChild = document.getElementsByClassName('selected-work__list')[0];
-	list.insertBefore(span, firstChild);
+	list.insertBefore(explosion, firstChild);
 
 	requestAnimationFrame(() => {
-		const p = new Particle(span, list, { isStatic: true, restitution: BOMB_RESTITUTION });
+		const p = new Particle(explosion, list, { isStatic: true, restitution: BOMB_RESTITUTION });
 		particles.push(p);
 		World.add(engine.world, p.body);
 		const sound = new Audio('assets/sound/gun-short.mp3');
 		sound.volume = 0.22;
 		sound.play();
 	});
+}
+
+const onMouseDown = () => {
+	bomb.classList.add('touched');
+}
+
+const onMouseUp = () => {
+	bomb.classList.remove('touched');
 }
 
 
