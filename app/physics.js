@@ -91,7 +91,7 @@ export const init = () => {
 		restitution: WALL_RESTITUTION,
 	}
 
-	const border = window.innerWidth <= 768 ? 25 : 35;
+	const border = window.innerWidth <= 768 ? 16 : 35;
 	walls = [
 		Bodies.rectangle(0, (rect.height / -2) + (border / 2), rect.width, border, options),
 		Bodies.rectangle(0, (rect.height / 2) - (border / 2), rect.width, border, options),
