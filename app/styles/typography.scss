@@ -60,15 +60,16 @@ html {
 }
 
 body {
-	padding: 2.5rem;
-	padding-top: 2rem;
-	background-image: url('../images/background-8.gif');
-	background-size: 100% auto; 
+	// padding: 2.5rem;
+	// padding-top: 2rem;
+	// background-image: url('../images/background-8.gif');
+	// background-size: 100% auto;
+	// padding-top: 14rem;
 
-	@media (max-width: $mobile) {
-		padding: 1.5rem;
-		padding-top: 1.2rem;
-	}
+	// @media (max-width: $mobile) {
+	// 	padding: 1.5rem;
+	// 	padding-top: 1.2rem;
+	// }
 }
 
 a {
@@ -122,49 +123,65 @@ a {
 }
 
 .about {
-	max-width: 340px;
-	margin-bottom: 14.0rem;
-	font-size: 1.35rem;
-	line-height: 1.4em;
+	max-width: 650px;
+	font-size: 2.25rem;
+	line-height: 1.5em;
 	font-family: 'Inconsolata', monospace;
+	margin: 14rem auto 13rem auto;
+    // text-justify: inter-word;
 	
 	@media (max-width: $mobile) {
-		max-width: 85%;
+		margin: 1.5rem 2rem 3rem 2rem;
+		font-size: 2.2rem;
 	}
 
 	@media (min-width: $xl) {
-		max-width: 490px;
-		font-size: 1.8rem;
-		margin-bottom: 25.0rem;
+		max-width: 750px;
+		font-size: 2.5rem;
+		margin-top: 20rem;
+		// font-size: 1.8rem;
+		// margin-bottom: 25.0rem;
 	}
 }
 
 .about a.hover {
 	color: $red;
-	text-shadow: 0 0 20px rgba($red, 0.6);
 }
 
+.about__para {
+	margin-bottom: 1em;
+}
 
 .about__para:not(:first-child) {
-	text-indent: 6rem;
+	// text-indent: 6rem;
 }
 
 .about__contact {
-	display: block;
+	@media (max-width: $mobile) {
+		display: block;
+	}
+}
+
+.about__contact-wrapper {
+	display: flex;
+	justify-content: space-between;
+	@media (max-width: $mobile) {
+		display: block;
+	}
 }
 
 
 .selected-work {
-	padding: 6.5rem 10rem 10rem 10rem;
+	padding: 0 10rem 10rem 10rem;
 	// border: 35px solid $red;
 	color: $red !important;
 	text-align: center;
-	background: #fff;
-	box-shadow: 0 0 50px 0 rgba(0,0,0,0.66);
+	// background: #fff;
+	// box-shadow: 0 0 50px 0 rgba(0,0,0,0.66);
 	cursor: pointer;
 	position: relative;
 	box-sizing: content-box;
-	overflow: hidden;
+	// overflow: hidden;
 
 	@media (max-width: $mobile) {
 		padding: 0 2.5rem 5rem 2.5rem;
@@ -237,9 +254,13 @@ a {
 	cursor: default;
 
 	@media (min-width: $xl) {
-		font-size: 1.7rem;
+		font-size: 1.6rem;
 		margin: 7rem 0 11rem 0;
 	}
+}
+
+.selected-work__title:first-child {
+	margin-top: 0;
 }
 
 .selected-work a {
@@ -248,9 +269,9 @@ a {
 	display: inline-block;
 }
 
-.selected-work a.hover {
-	text-shadow: 0 0 40px rgba($red, 0.8);
-}
+// .selected-work a.hover {
+// 	text-shadow: 0 0 40px rgba($red, 0.8);
+// }
 
 .selected-work__list {
 	@media (max-width: $mobile) {
@@ -288,20 +309,20 @@ a {
 	}
 
 	@media (min-width: $xl) {
-		font-size: 8rem;
+		font-size: 5rem;
 		margin-bottom: 1.5rem;
 	}
 }
 
 .selected-work__span {
 	display: block;
-	font-size: 1.35rem;
-	line-height: 1.4em;
+	font-size: 1.65rem;
+	line-height: 1.45em;
 	font-family: 'Inconsolata', monospace;
 
-	@media (min-width: $xl) {
-		font-size: 1.8rem;
-	}
+	// @media (min-width: $xl) {
+	// 	font-size: 1.8rem;
+	// }
 }
 
 .selected-work canvas {

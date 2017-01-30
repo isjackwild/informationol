@@ -91,13 +91,13 @@ export const init = () => {
 		restitution: WALL_RESTITUTION,
 	}
 
-	const border = window.innerWidth <= 768 ? 16 : 35;
+	const border = 10;
 	walls = [
-		Bodies.rectangle(0, (rect.height / -2) + (border / 2), rect.width, border, options),
-		Bodies.rectangle(0, (rect.height / 2) - (border / 2), rect.width, border, options),
+		Bodies.rectangle(0, (rect.height / -2) - (border / 2), rect.width, border, options),
+		Bodies.rectangle(0, (rect.height / 2) + (border / 2), rect.width, border, options),
 
-		Bodies.rectangle((rect.width / -2) + (border / 2), 0, border, rect.height, options),
-		Bodies.rectangle((rect.width / 2) - (border / 2), 0, border, rect.height, options),
+		Bodies.rectangle((rect.width / -2) - (border / 2), 0, border, rect.height, options),
+		Bodies.rectangle((rect.width / 2) + (border / 2), 0, border, rect.height, options),
 	]
 
 	items.forEach(item => particles.push(new Particle(item, list)));
@@ -168,7 +168,7 @@ const addFire = (e) => {
 	explosionBoom.className = 'explosion__boom';
 	explosion.appendChild(explosionBoom);
 
-	explosion.style.left = `${elX - 42}px`;
+	explosion.style.left = `${elX - 12}px`;
 	explosion.style.top = `${elY - 15}px`;
 
 	const firstChild = document.getElementsByClassName('selected-work__list')[0];
