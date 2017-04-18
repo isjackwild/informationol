@@ -53,7 +53,7 @@ class Particle {
 			this.body.position.y - mP.y,
 		).norm().multiply(new Victor(scale, scale));
 
-		Body.applyForce(this.body, { x: mP.x, y: mP.y }, force);
+		Body.applyForce(this.body, mP, force);
 	}
 	
 	update(time) {
