@@ -1,0 +1,152 @@
+<html>
+<head>
+	<title>Jack Wild</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=0" />
+	<meta name="google-site-verification" content="6sRZzQv1_8kYABobZzTBNPh3lOupgLgKlrdNmydtg5w" />
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/assets/favicons/manifest.json">
+	<link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i|Droid+Serif:400,400i,700,700i|Fira+Mono:400,700|Fira+Sans:300,300i,400,400i,500,500i,700,700i|Halant:300,400,500,600,700|Inconsolata:400,700|Kanit:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Karla:400,400i,700,700i|Merriweather:300,300i,400,400i,700,700i,900,900i|PT+Mono|PT+Serif:400,400i,700,700i|Prompt:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto+Slab:100,300,400,700|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Source+Serif+Pro:400,600,700|Sura:400,700|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900|Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> -->
+</head>
+<body>
+
+	<article class="case-study">
+		<div class="case-study__header"></div>
+		<h1 class="case-study__title">Unstable Ground</h1>
+		<p class="case-study__para">
+			A collaboration between Madelaine Dowd and myself, <i>Unstable Ground</i> is an interactive exhibition installation exploring the interconnected stories of the 2009 L’Aquila earthquake in Italy.
+		</p>
+		<p class="case-study__para">
+			I have been experimenting with the applications of web technologies in exhibition design and Madelaine has been researching post-disaster relief and how communities can be rebuilt following a natural disaster. As part of her research she talked to earthquake survivors about their experiences, and how they have been rebuilding their lives in the years since.
+		</p>
+		<p class="case-study__para">
+			We wanted to create an interactive installation which would allow users to explore the interviews in a way which was engaging and encouraged focused listening. The installation also needed to be cheap and easy to distribute, setup and run, and powered by consumer electronics so that it could be taken back into the disaster zone as part of a temporary pop-up exhibition.
+		</p>
+		<figure class="figure--full">
+			<img class="img--small" src="assets/unstable-ground/sketch-1.jpg">
+			<img class="img--small" src="assets/unstable-ground/sketch-2.jpg">
+			<img class="img--small" src="assets/unstable-ground/sketch-3.jpg">
+			<img class="img--small" src="assets/unstable-ground/sketch-4.jpg">
+			<figcaption>Early concept sketches</figcaption>
+		</figure>
+		<p class="case-study__para">
+			The first task was to make sense of the hours worth of interviews recorded. The conversations were annotated, mapped, edited, and divided into shorter clips, of around 30 seconds each. We then identified how the clips followed on to one another, before finally identifying connections between clips from the different interviews. The clips were then mapped in 3D space, with clips referring to the event being in the centre, and bring placed further out as the time since the earthquake passes, and then drew the paths of the interview’s progression and connections between different interviews. This was to form the basis of the interface by which the interviews could be explored.
+		</p>
+		<figure>
+			<img class="img--xl" src="assets/unstable-ground/mapping.jpg">
+			<figcaption>Early attempts of mapping the clips and their connections in 3D space</figcaption>
+		</figure>
+		<p class="case-study__para">
+			Using the web as the platform meant that the installation could be distributed digitally and easily setup without the need for in-depth technical knowledge or specialist equipment which would likely not be available in a smaller community hosting a pop-up exhibition.
+		</p>
+		<p class="case-study__para">
+			<i>Three.js</i> was used to create the 3D world. One of the main challenges when building the world was spacing out the clips in a way which felt even yet natural, and without overlapping or crowding. I first explored using Fibonacci distribution on a sphere as my starting point, but this approach gave results which felt too structured and rigid for the naturally chaotic subject-matter, and it was difficult to recreate the progression of clips moving outwards from the centre as the time passed since the event.
+		</p>
+		<figure class="figure--full">
+			<img class="img--small" src="assets/unstable-ground/dev-1.jpg">
+			<img class="img--small" src="assets/unstable-ground/dev-3.jpg">
+			<img class="img--small" src="assets/unstable-ground/dev-4.jpg">
+			<img class="img--small" src="assets/unstable-ground/dev-2.jpg">
+			<figcaption>Placement of the clips in the 3D scene using a conical spiral</figcaption>
+		</figure>
+		<p class="case-study__para">
+			Eventually a conical spiral was used to guide the placement of clips: for each interview a spiral was created, growing from the centre outwards, and clips were distributed at points along this spiral, with random position offsets to create the illusion of disorder.
+		</p>
+		<p class="case-study__para">
+			I then created the paths which connect the clips. Bezier curves were plotted between connected content, the control points were semi-randomly positioned, and these formed the basis for the geometry of the ribbons and camera movement paths.
+		</p>
+		<figure class="figure--full">
+			<img class="img--medium" src="assets/unstable-ground/dev-6.jpg">
+			<img class="img--medium" src="assets/unstable-ground/dev-7.jpg">
+			<img class="img--medium" src="assets/unstable-ground/dev-5.jpg">
+			<img class="img--small" src="assets/unstable-ground/lines-1.jpg">
+			<img class="img--small" src="assets/unstable-ground/lines-3.jpg">
+			<img class="img--small" src="assets/unstable-ground/lines-4.jpg">
+			<img class="img--small" src="assets/unstable-ground/lines-2.jpg">
+			<figcaption>Development of the ribbons and camera paths</figcaption>
+		</figure>
+		<p class="case-study__para">
+			The vertexes of the ribbons were offset using Perlin noise to give them an imperfect aesthetic, and the camera movement paths loosely followed these ribbons, giving the impression that the camera was naturally following the ribbons, rather than being attached to them like rails.
+		</p>
+		<figure class="figure--full">
+			<img class="img--medium" src="assets/unstable-ground/travel-1.gif">
+			<img class="img--medium" src="assets/unstable-ground/travel-2.gif">
+			<img class="img--medium" src="assets/unstable-ground/travel-3.gif">
+			<figcaption>Camera movements</figcaption>
+		</figure>
+		<p class="case-study__para">
+			As the installation was to be used as part of an exhibition, rather than in a solitary setting at home, we felt it was important to connect the interface to the environment in which it was to be experience. Due to the need to make use of consumer electronics rather than specialist equipment a projector was used to light the room in colours matching the content on screen, and audio was played through a set of speakers. The environment was powered by a separate web-app running on a Mac Mini and the two apps communicated with each-other and the server via <i>Web Sockets</i>, which provided the low-latency bi-directional communication necessary to have the environment react instantly to interactions on the tablet.
+		</p>
+		<figure class="">
+			<img class="img--xl" src="assets/unstable-ground/web-sockets.gif">
+			<figcaption>Web Sockets provided low-latency communication between the interface and the reactive lighing and ambient audio</figcaption>
+		</figure>
+		<p class="case-study__para">
+			The audio spatialisation capabilities of the <i>Web Audio API</i> were exploited to create an ambient audio landscape made up of all the audio clips. Each clip was placed in a sound scene matching the corresponding clip position in the 3D scene, and the listener was updated each frame to match the position and orientation of the camera. When a clip was triggered on the interface, the ambient audio faded out, and the selected clip was played ambiently in the environment.
+		</p>
+		<p class="case-study__para">
+			The user interface layer was built using <i>React</i>, my go-to framework for UI development. A key element of the interface is the interactive SVG border around the frame of the screen. This device worked as an indicator for when a trigger point would be activated, and then showed the progress of the audio clips when playing. There is also an viewfinder which acts as a focus aid, and interacts with the 3D scene to clearly show when a trigger point has been focused on, UI copy which shows the user the information about the clip they are listening to, and some help tips which are shown if a user is having difficulty exploring.
+		</p>
+		<figure class="figure--full">
+			<img class="img--medium" src="assets/unstable-ground/ui-1.PNG">
+			<!-- <img class="img--small" src="assets/unstable-ground/ui-1.PNG"> -->
+			<!-- <img class="img--medium" src="assets/unstable-ground/ui-2.PNG"> -->
+			<img class="img--medium" src="assets/unstable-ground/trigger-3.gif">
+			<img class="img--medium" src="assets/unstable-ground/trigger-2.gif">
+			<!-- <img class="img--medium" src="assets/unstable-ground/ui-3.PNG"> -->
+			<!-- <img class="img--medium" src="assets/unstable-ground/ui-4.PNG"> -->
+			<figcaption>UI details showing the viewfinder and interactive border.<br/><a target="blank" href="https://github.com/jbmorizot/BluuNext">BluuNext</a> and <a target="blank" href="https://fonts.google.com/specimen/Work+Sans">Work Sans</a> were used for the UI typography</figcaption>
+		</figure>
+		<p class="case-study__para">
+			Extensive user testing was undertaken in the development stage, and in situ the day before opening, and this allowed us to tweak the UX and UI until the mechanics were intuitively understood by the vast majority of users. One unforeseen issue was that a few users did not understand to pick up the tablet from the table after pressing the ‘Start’ button, and this is something we will be addressing with clearer instructions.
+		</p>
+		<p class="case-study__para">
+			Due to the discrepancy between the very ‘natural’ and physical subject of the earthquake, and the very ‘digital’ 3D interface the Art Direction was a tough challenge to get right. Much needed inspiration came in the form of a lecture I attended by <i>Cristiano Toraldo di Francia</i>, of the now legendary Italian speculative architecture practice <i>Superstudio</i>, which he co-founded in 1966. This encouraged me to experiment with heavily digitally-treated textures, which ended in a result which nodded to the natural, while remaining honestly digital at its core. I also made extensive use of Perlin noise to animate objects in the scene, and offset vectors of my geometries to add some natural-feeling imperfections and instability.
+		</p>
+		<figure>
+			<img class="img--xl" src="assets/unstable-ground/cracks-1.jpg">
+			<figcaption>Much needed art direction inspiration came from the use of texture and heavily treated imagery in the work of Superstudio</figcaption>
+		</figure>
+		<p class="case-study__para">
+			Various colour ways were also explored — as there are also aspects of data-visualisation to the interface this complicated things further as colours needed to be strong to differentiate between the interviews, and it was important for connections between clips to be clearly indicated. Colours were taken from Madelaine’s photographs of L’Aquila as our starting point, and we experimented until we found colours which had enough contrast and impact, while retaining a natural feeling which was familiar to L’Aquila. Again, the work of <i>Superstudio</i> helped to inform these design decisions.
+		</p>
+		<figure class="figure--full">
+			<img class="img--small" src="assets/unstable-ground/colour-1.jpg">
+			<img class="img--small" src="assets/unstable-ground/colour-2.jpg">
+			<img class="img--small" src="assets/unstable-ground/colour-4.jpg">
+			<img class="img--small" src="assets/unstable-ground/colour-3.jpg">
+			<figcaption>The colourways of each interview</figcaption>
+		</figure>
+		<p class="case-study__para">
+			The installation was shown at <i><a href="http://into-the-dark.space" target="blank">Into The Dark</a></i>, the symposium of the Research, Design, Publish Visual Communication elective at the Royal College of Art, which was held in a disused World War Two air-raid shelter hidden behind the McDonalds in Dalston. The installation was shown in a space designed by Madelaine, along side her research material and Oliver Joe McLaughlin’s accompanying photography, including animated portraits of the interviewees featured. Encouraged by the feedback received, and lessons learned from watching people engage with the installation, we plan to continue to explore ways in which web technologies can be used in interactive exhibition design for temporary spaces, and aim to take the exhibition back to the areas affected by the most recent Italian earthquakes in Abruzzo to help those affected learn from the challenges and positive outcomes of the efforts to rebuild L’Aquila.
+		</p>
+		<figure class="figure--full">
+			<img class="img--medium" src="assets/unstable-ground/exhibition-1.jpg">
+			<img class="img--medium" src="assets/unstable-ground/exhibition-2.jpg">
+			<img class="img--medium" src="assets/unstable-ground/exhibition-3.jpg">
+			<figcaption>The exhibition space</figcaption>
+		</figure>
+	</article>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-43611103-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+</body>
+</html>

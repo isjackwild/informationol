@@ -273,6 +273,8 @@ a {
 // 	text-shadow: 0 0 40px rgba($red, 0.8);
 // }
 
+
+
 .selected-work__list {
 	@media (max-width: $mobile) {
 		padding: 3.5rem;
@@ -423,4 +425,116 @@ a {
 	position: absolute;
 	bottom: 0;
 	left: -6px;
+}
+
+
+.case-study__header {
+	width: 100%;
+	height: 33%;
+	background: url("../unstable-ground/cover--teal.jpg");
+	display: block;
+	position: relative;
+	margin-bottom: 18rem;
+}
+
+.case-study__title {
+	font-family: 'Poppins', sans-serif;
+	letter-spacing: -0.025em;
+	font-size: 4.2rem;
+	font-weight: 600;
+	line-height: 1.1em;
+	margin-bottom: 1em;
+	line-height: 1em;
+	color: $red;
+	text-align: center;
+	
+	@media (max-width: $mobile) {
+		font-size: 3rem;
+	}
+
+	@media (min-width: $xl) {
+		font-size: 5rem;
+		margin-bottom: 1.5rem;
+	}
+}
+
+.case-study__para {
+	max-width: 650px;
+	font-size: 2.25rem;
+	line-height: 1.5em;
+	font-family: 'Inconsolata', monospace;
+	margin: 0 auto 1em auto;
+    // text-justify: inter-word;
+	
+	@media (max-width: $mobile) {
+		font-size: 2.2rem;
+	}
+
+	@media (min-width: $xl) {
+		max-width: 750px;
+		font-size: 2.5rem;
+	}
+}
+
+figure {
+	font-size: 0;
+	position: relative;
+	text-align: center;
+	margin: 6rem auto;
+	padding: 0 5px;
+	width: 660px;
+}
+
+.figure--full {
+	width: 100%;
+	padding: 0 40px;
+	// margin: 12rem auto;
+}
+
+figcaption {
+	font-family: 'Inconsolata', monospace;
+	font-size: 1.5rem;
+	// margin-top: 5px;
+	text-align: left;
+	padding: 0 5px;
+	color: $red;
+	max-width: 520px;
+}
+
+figure img {
+	padding: 5px;
+}
+
+.img--small {
+	width: 25%;
+	height: auto;
+}
+
+.img--medium {
+	width: 33.33%;
+	height: auto;
+}
+
+.img--large {
+	width: 50%;
+	height: auto;
+}
+
+.img--xl {
+	width: 100%;
+	height: auto;
+}
+
+.text--red {
+	color: $red;
+}
+
+i {
+	font-style: normal;
+	// font-weight: bold;
+	text-transform: uppercase;
+	vertical-align: baseline;
+	font-size: 0.77em;
+	letter-spacing: 0.17em;
+	color: $red;
 }
