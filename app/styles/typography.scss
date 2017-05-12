@@ -427,15 +427,40 @@ a {
 	left: -6px;
 }
 
+.case-study {
+	background: #fff;
+	margin-top: 33vw;
+}
+
 
 .case-study__header {
+	z-index: -1;
+	top: 0;
+	position: fixed;
 	width: 100%;
-	height: 33%;
+	height: 33vw;
 	background: url("../unstable-ground/cover--teal.jpg");
 	display: block;
-	position: relative;
-	margin-bottom: 18rem;
+	// position: relative;
+	margin-bottom: 14rem;
+	overflow: hidden;
+
+	video {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		width: 100%;
+	}
+
+	@media (max-width: $mobile) {
+		margin-bottom: 8rem;
+	}
 }
+.case-study {
+	padding-top: 3rem;
+}
+
 
 .case-study__title {
 	font-family: 'Poppins', sans-serif;
@@ -444,12 +469,15 @@ a {
 	font-weight: 600;
 	line-height: 1.1em;
 	margin-bottom: 1em;
+	margin-top: 2.6em;
 	line-height: 1em;
 	color: $red;
 	text-align: center;
 	
 	@media (max-width: $mobile) {
 		font-size: 3rem;
+		margin-left: 2rem;
+		margin-right: 2rem;
 	}
 
 	@media (min-width: $xl) {
@@ -468,6 +496,7 @@ a {
 	
 	@media (max-width: $mobile) {
 		font-size: 2.2rem;
+		margin: 1.5rem 2rem 3rem 2rem;
 	}
 
 	@media (min-width: $xl) {
@@ -483,11 +512,22 @@ figure {
 	margin: 6rem auto;
 	padding: 0 5px;
 	width: 660px;
+
+	@media (max-width: $mobile) {
+		width: 100%;
+		padding-left: calc(2rem - 5px);
+		padding-right: calc(2rem - 5px);
+	}
 }
 
 .figure--full {
 	width: 100%;
 	padding: 0 40px;
+
+	@media (max-width: $mobile) {
+		padding-left: calc(2rem - 5px);
+		padding-right: calc(2rem - 5px);
+	}
 	// margin: 12rem auto;
 }
 
@@ -501,28 +541,42 @@ figcaption {
 	max-width: 520px;
 }
 
-figure img {
+figure img, figure video {
 	padding: 5px;
 }
 
 .img--small {
 	width: 25%;
 	height: auto;
+
+	@media (max-width: $mobile) {
+		width: 50%;
+	}
 }
 
 .img--medium {
 	width: 33.33%;
 	height: auto;
+
+	@media (max-width: $mobile) {
+		width: 100%;
+	}
 }
 
 .img--large {
 	width: 50%;
 	height: auto;
+
+	@media (max-width: $mobile) {
+		width: 100%;
+	}
 }
 
 .img--xl {
 	width: 100%;
 	height: auto;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .text--red {
