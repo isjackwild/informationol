@@ -18,11 +18,33 @@
 	<meta name="theme-color" content="#ffffff">
 	<!-- <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400i,700,700i|Droid+Serif:400,400i,700,700i|Fira+Mono:400,700|Fira+Sans:300,300i,400,400i,500,500i,700,700i|Halant:300,400,500,600,700|Inconsolata:400,700|Kanit:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Karla:400,400i,700,700i|Merriweather:300,300i,400,400i,700,700i,900,900i|PT+Mono|PT+Serif:400,400i,700,700i|Prompt:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto+Slab:100,300,400,700|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Source+Serif+Pro:400,600,700|Sura:400,700|Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900|Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> -->
+
+	<!-- Schema.org markup for Google+ -->
+	<meta itemprop="name" content="Unstable Ground">
+	<meta itemprop="description" content="An interactive installation exploring the interconnected stories of the 2009 earthquakes in Italy">
+	<meta itemprop="image" content="https://isjackwild.com/assets/unstable-ground/lines-2.jpg">
+
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@isjackwild">
+	<meta name="twitter:title" content="Unstable Ground">
+	<meta name="twitter:description" content="An interactive installation exploring the interconnected stories of the 2009 earthquakes in Italy">
+	<meta name="twitter:creator" content="@isjackwild">
+	<!-- Twitter summary card with large image must be at least 280x150px -->
+	<meta name="twitter:image:src" content="https://isjackwild.com/assets/unstable-ground/lines-2.jpg">
+
+	<!-- Open Graph data -->
+	<meta property="og:title" content="Unstable Ground" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://isjackwild.com" />
+	<meta property="og:image" content="https://isjackwild.com/assets/unstable-ground/lines-2.jpg" />
+	<meta property="og:description" content="An interactive installation exploring the interconnected stories of the 2009 earthquakes in Italy" />
+	<meta property="og:site_name" content="Is Jack Wild?" />
 </head>
 <body>
 
 	<div class="case-study__header">
-		<video autoplay loop class="img--xl" src="/assets/unstable-ground/traveling--cropped-2.mp4"/>
+		<video playsinline autoplay loop class="img--xl" src="/assets/unstable-ground/traveling--cropped-2.mp4"/>
 	</div>
 	<article class="case-study">
 		<h1 class="case-study__title">Unstable Ground</h1>
@@ -65,7 +87,7 @@
 			<img class="img--small" src="/assets/unstable-ground/dev-3.jpg">
 			<img class="img--small" src="/assets/unstable-ground/dev-4.jpg">
 			<img class="img--small" src="/assets/unstable-ground/dev-2.jpg">
-			<figcaption>Placement of the clips in the 3D scene using Fibonacci distribution (left) and a conical spiral</figcaption>
+			<figcaption>Placement of the clips in the 3D scene using a conical spiral</figcaption>
 		</figure>
 		<p class="case-study__para">
 			Eventually a conical spiral was used to guide the placement of clips: for each interview a spiral was created, growing from the centre outwards, and clips were distributed at points along this spiral, with random position offsets to create the illusion of disorder.
@@ -77,19 +99,19 @@
 			<img class="img--medium" src="/assets/unstable-ground/dev-6.jpg">
 			<img class="img--medium" src="/assets/unstable-ground/dev-7.jpg">
 			<img class="img--medium" src="/assets/unstable-ground/dev-5.jpg">
-			<img class="img--small" src="/assets/unstable-ground/lines-1.jpg">
+			<!-- <img class="img--small" src="/assets/unstable-ground/lines-1.jpg">
 			<img class="img--small" src="/assets/unstable-ground/lines-3.jpg">
 			<img class="img--small" src="/assets/unstable-ground/lines-4.jpg">
-			<img class="img--small" src="/assets/unstable-ground/lines-2.jpg">
+			<img class="img--small" src="/assets/unstable-ground/lines-2.jpg"> -->
 			<figcaption>Development of the ribbons and camera paths</figcaption>
 		</figure>
 		<p class="case-study__para">
-			The vertexes of the ribbons were offset using Perlin noise to give them an imperfect aesthetic, and the camera movement paths loosely followed these ribbons, giving the impression that the camera was naturally following the ribbons, rather than being attached to them on rails.
+			The vertexes of the ribbons were offset using noise to give them an imperfect aesthetic, and the camera movement paths loosely followed these ribbons, giving the impression that the camera was naturally following the ribbons, rather than being attached to them on rails.
 		</p>
 		<figure class="figure--full">
-			<img class="img--medium" src="/assets/unstable-ground/travel-1.gif">
-			<img class="img--medium" src="/assets/unstable-ground/travel-2.gif">
-			<img class="img--medium" src="/assets/unstable-ground/travel-3.gif">
+			<img class="img--medium" src="/assets/unstable-ground/travel-1--s.gif">
+			<img class="img--medium" src="/assets/unstable-ground/travel-2--s.gif">
+			<img class="img--medium" src="/assets/unstable-ground/travel-3--s.gif">
 			<figcaption>Camera movements loosely followed the ribbons</figcaption>
 		</figure>
 		<p class="case-study__para">
@@ -100,7 +122,7 @@
 		</p>
 		<figure class="">
 			<img class="img--xl" src="/assets/unstable-ground/web-sockets.gif">
-			<figcaption>Web Sockets provided low-latency communication between the interface and the reactive lighing and ambient audio (photo: Louby McLougin)</figcaption>
+			<figcaption>Web Sockets provided low-latency communication between the interface and the reactive lighing and ambient audio (photo: Louby McLouglin)</figcaption>
 		</figure>
 		<p class="case-study__para">
 			The audio spatialisation capabilities of the <i>Web Audio API</i> were exploited to create an ambient audio landscape made up of all the audio clips. Each clip was placed in a sound scene in the environment app matching the corresponding clip position in the 3D scene on the interface app, and the listener was updated each frame to match the position and orientation of the camera. When a clip was triggered on the interface, the ambient audio faded out, and the selected clip was played in the environment.
@@ -112,8 +134,8 @@
 			<img class="img--medium" src="/assets/unstable-ground/ui-1.PNG">
 			<!-- <img class="img--small" src="assets/unstable-ground/ui-1.PNG"> -->
 			<!-- <img class="img--medium" src="assets/unstable-ground/ui-2.PNG"> -->
-			<img class="img--medium" src="/assets/unstable-ground/trigger-3.gif">
-			<img class="img--medium" src="/assets/unstable-ground/trigger-2.gif">
+			<img class="img--medium" src="/assets/unstable-ground/trigger-3--s.gif">
+			<img class="img--medium" src="/assets/unstable-ground/trigger-2--s.gif">
 			<!-- <img class="img--medium" src="assets/unstable-ground/ui-3.PNG"> -->
 			<!-- <img class="img--medium" src="assets/unstable-ground/ui-4.PNG"> -->
 			<figcaption>UI details showing the viewfinder and interactive border.<br/><a target="blank" href="https://github.com/jbmorizot/BluuNext">BluuNext</a> and <a target="blank" href="https://fonts.google.com/specimen/Work+Sans">Work Sans</a> were used for the UI typography</figcaption>
@@ -122,7 +144,7 @@
 			Extensive user testing was undertaken in the development stage, and in situ the day before opening, and this allowed us to tweak the UX and UI where necessary. I have also recently been researching and prototyping UI for VR, and was able to employ what I have learned here, and in the end the interface was intuitively understood by the vast majority of users. Unfortunately, one unforeseen issue was that a few users did not understand to pick up the tablet from the table after pressing the ‘Start’ button, and this is something we will be addressing with clearer on-boarding instructions.
 		</p>
 		<p class="case-study__para">
-			Due to the discrepancy between the very physical subject of the earthquake, and the very digital 3D interface the Art Direction was a tough challenge to get right. Much needed inspiration came in the form of a lecture I attended by <i>Cristiano Toraldo di Francia</i>, of the now legendary Italian speculative Architecture practice <i>Superstudio</i>, which he co-founded in 1966. This encouraged me to experiment with heavily treated textures, which ended in a result which nodded to the natural, while remaining honestly digital at its core. I also made use of Perlin noise to animate objects in the scene to add to the sense that “everything is moving” (as one of the interviewees put it), and offset vectors of my geometries to add some natural-feeling imperfections and instability.
+			Due to the discrepancy between the very physical subject of the earthquake, and the very digital 3D interface the Art Direction was a tough challenge to get right. Much needed inspiration came in the form of a lecture I attended by <i>Cristiano Toraldo di Francia</i>, of the now legendary Italian speculative Architecture practice <i>Superstudio</i>, which he co-founded in 1966. This encouraged me to experiment with heavily treated textures, which ended in a result which nodded to the natural, while remaining honestly digital at its core. I also made use of noise to animate objects in the scene to add to the sense that “everything is moving” (as one of the interviewees put it), and offset vectors of my geometries to add some natural-feeling imperfections and instability.
 		</p>
 		<figure>
 			<img class="img--xl" src="/assets/unstable-ground/cracks-1.jpg">
@@ -144,14 +166,14 @@
 		<figure class="">
 			<!-- <img class="img--xl" src="/assets/unstable-ground/exhibition-1.jpg"> -->
 			<img class="img--xl" src="/assets/unstable-ground/exhibition-2.jpg">
-			<img class="img--xl" src="/assets/unstable-ground/exhibition-3.jpg">
+			<!-- <img class="img--xl" src="/assets/unstable-ground/exhibition-3.jpg"> -->
 			<figcaption>The exhibition space and accompanying photography by Oliver Joe McLaughlin (photo: Madelaine Dowd)</figcaption>
 		</figure>
 		<p class="case-study__para">
 			Encouraged by the feedback received, and lessons learned from watching people engage with the installation, we plan to continue to explore ways in which web technologies can be used in interactive exhibition design for temporary spaces, and aim to take the exhibition back to the areas affected by the most recent Italian earthquakes in Abruzzo to help those affected learn from the challenges and positive outcomes of the efforts to rebuild L’Aquila.
 		</p>
 		<figure>
-			<video controls autoplay loop class="img--xl" src="/assets/unstable-ground/unsable-ground--movie--hq--compressed.mp4"></video>
+			<video playsinline controls autoplay loop class="img--xl" src="/assets/unstable-ground/unsable-ground--movie--hq--compressed.mp4"></video>
 		</figure>
 	</article>
 	<script>

@@ -123,7 +123,7 @@ a {
 }
 
 .about {
-	max-width: 650px;
+	max-width: 750px;
 	font-size: 2.25rem;
 	line-height: 1.5em;
 	font-family: 'Inconsolata', monospace;
@@ -263,7 +263,7 @@ a {
 	margin-top: 0;
 }
 
-.selected-work a {
+.selected-work a:not(.body-link) {
 	text-decoration: none;
 	-webkit-user-select: none !important;
 	display: inline-block;
@@ -482,7 +482,7 @@ a {
 
 	@media (min-width: $xl) {
 		font-size: 5rem;
-		margin-bottom: 1.5rem;
+		// margin-bottom: 1.5em;
 	}
 }
 
@@ -517,6 +517,10 @@ figure {
 		width: 100%;
 		padding-left: calc(2rem - 5px);
 		padding-right: calc(2rem - 5px);
+	}
+
+	@media (min-width: $xl) {
+		width: 750px;
 	}
 }
 
